@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio - Ahmad Saleh</title>
+  <title>Certification</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -26,6 +26,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  
+  
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
   <!-- =======================================================
   * Template Name: Kelly - v2.0.0
@@ -50,11 +53,11 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="resume.html">Resume</a></li>
-	  <li><a href="certification.html">Certification</a></li>
+	  <li class="active"><a href="certification.html">Certification</a></li>
 	  <li><a href="cv.html">Curriculum Vitae</a></li>
-          <li class="active"><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="contact.html">Contact</a></li>
-	  
+		  
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -71,132 +74,55 @@
 
   <main id="main">
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+    <!-- ======= Certification Section ======= -->
+  
+  <section id="resume" class="resume">
       <div class="container" data-aos="fade-up">
 
+
         <div class="section-title">
-          <h2>Portfolio</h2>
-          <p>I learn and practice my knowledge and skill of the full-stack developer, WordPress and design in my free time after office hour or the weekend. 
-		  Therefore I could produce some creations. </p>
-		  
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>          
-              <li data-filter=".filter-web">Web</li>
-			  <li data-filter=".filter-card">Card</li>
-            </ul>
-          </div>
+          <h2>My Projects</h2>
+          <p>
+		  I learn and practice my knowledge and skill of Python, SQL, Excell, Power BI, Tableau, HTML, WordPress and design in my free time after office hour or the weekend. Therefore I could produce some creations.
+		  </p><br>  
         </div>
 
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 1</h4>
-                <p>Web</p>
-                <div class="http://artacyber.com/">
-                  <a href="assets/img/portfolio/portfolio-1.png" data-gall="portfolioGallery" class="venobox" title="Web 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details-web1.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-		<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-2.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 2</h4>
-                <p>Web</p>
-                <div class="http://automotivemotion.com/">
-                  <a href="assets/img/portfolio/portfolio-2.png" data-gall="portfolioGallery" class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details-web2.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-        </div>
-
-		<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="http://ahmadsaleh.com/">
-                  <a href="assets/img/portfolio/portfolio-3.png" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details-web3.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-        </div>
-
-          
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 1</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details-cards.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-		  
-		 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 2</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details-cards.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> 
-		  
-		  
-		<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 3</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details-cards.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>   
+<div class="leftsidebar_templ1">
+	<ul id="nav">
 		
-		<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 4</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="Card 4"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details-cards.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>   
+		<li class="expanded"><a class="on"> <b>Exploratory Data Analysing 10 Top Indonesian Youtuber - Personal Project – Kula Lumpur, Malaysia 2023</b></a> <a href="https://github.com/artacyber/Exploratory-Data-Analysing-10-Top-Indonesian-Youtuber/blob/main/Exploratory%20Data%20Analysing%2010%20TOP%20Indonesian%20Youtuber.ipynb">See the Project</a>
+			<ol class="submuneu">
+			<li><a>Utilized Python to analyze the top 10 youtube channels in Indonesia and gain insights into statistics of video, sub-scribers, views </li>
+			<li><a>Aggregated and visualized the data by using pandas, matplotlib and seaborn to compile a professional report </li>	
+			</ol>
 		
-        </div>
+		<li class="expanded"><a class="on"> <b>FIFA 2023 Dashboard – Personal Project - Kuala Lumpur, Malaysia 2023</b></a> 
+			<ol class="submuneu">
+			<li><a>Created a dashboard with Power Bi to see the performance of football clubs and players</li>
+			<li><a>Compare overall rating, wage, value, and player statistics of L. Messi VS Cristiano Ronaldo</li>	
+			</ol>
 
-      </div>
-    </section><!-- End Portfolio Section -->
+
+			<li class="expanded"><a class="on"> <b>US Flight Dashboard – Personal Project - Kuala Lumpur, Malaysia 2023</b></a> <a href="https://public.tableau.com/app/profile/ahmadsalehnasution/viz/USFlightDelayJun2003-Mar2023/USFlightDelayJun2003-Mar2023">See the Project</a>
+			<ol class="submuneu">
+			<li><a>Create a dashboard with Tableau for the statistical cause of the delayed flight in the US</li>
+			<li><a>Transformed and processed data by using Excel to ensure data completeness and validity</li>	
+			</ol>
+
+			<li class="expanded"><a class="on"> <b>Arta Cyber, Website Developer – Personal Project – Kuala Lumpur, Malaysia 2016</b></a> <a href="https://artacyber.com">See the Project</a>
+			<ol class="submuneu">
+			<li><a>Develop and maintain a website hosted on WordPress/WP Engine</li>
+			<li><a>Monitoring website traffic using Google Analytics, Implementing updates, upgrades, and patches of the WP Engine</li>	
+			</ol>
+		
+		
+	</ul>
+</div>
+
+
+
+       
+    </section><!-- End Certification Section -->
 
   </main><!-- End #main -->
 
