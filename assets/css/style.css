@@ -608,6 +608,13 @@ section {
   margin-bottom: 0;
 }
 
+.image-round {
+ 			width: 150px;
+ 			height: 150px;
+			border-radius: 50%;
+  			object-fit: cover; /* Memastikan gambar tidak gepeng/distorsi */
+			}
+
 /*--------------------------------------------------------------
 # Skills
 --------------------------------------------------------------*/
