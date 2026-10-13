@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluating AI answers in Indonesian | Ahmad Saleh</title>
+  <meta name="description" content="Case study: a 30-question Indonesian test set with human reference answers, run against two AI assistant configurations. 60 answers scored on relevance, accuracy, policy compliance and honesty about missing live data.">
+  <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .cs-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.95rem}
+    .cs-table th,.cs-table td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top}
+    .cs-table th{background:var(--accent-soft);font-weight:600}
+    .cs-flow{font-family:var(--font-mono);font-size:.83rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem;overflow-x:auto;white-space:pre;margin:1.25rem 0}
+    .badge{display:inline-block;padding:.15rem .55rem;border-radius:999px;background:var(--tag-bg);color:var(--tag-ink);font-size:.78rem;font-weight:600}
+    .cs-meta{color:var(--muted);font-size:.9rem;margin-top:.35rem}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main" class="page">
+    <a class="back-link" href="index.html#projects"><span aria-hidden="true">←</span> Ahmad Saleh</a>
+
+    <header class="page__head">
+      <p class="intro__eyebrow">Case study · 2026 · <span class="badge">Prototype</span></p>
+      <h1 class="page__title">Evaluating AI answers in Indonesian</h1>
+      <p class="page__lead">A 30-question Indonesian test set with human-written reference answers, run against two assistant configurations. 60 answers were generated and scored on relevance, factual accuracy, policy compliance and honesty about missing live data.</p>
+      <p class="cs-meta">My own test design and reference answers · agent-generated answers and first-pass scoring · scoring sample of 20 answers awaiting human verification</p>
+    </header>
+
+    <section aria-labelledby="problem">
+      <h2 class="subhead" id="problem">The problem</h2>
+      <p>A company that puts an Indonesian-language AI assistant in front of customers has no idea how often the answers are wrong, off-topic, or outside policy. Without measurement, "improving the prompt" is guesswork. The job is to turn answer quality into a number that can be tracked — and to be honest about the fact that the standard itself is a human judgement.</p>
+    </section>
+
+    <section aria-labelledby="role">
+      <h2 class="subhead" id="role">What I did, and what the agent did</h2>
+      <ul class="plain-list">
+        <li><strong>I designed the test.</strong> 30 Indonesian questions on gold and personal finance in Malaysia and Indonesia, including six deliberate traps: requests for guaranteed returns, requests for personal investment advice, a request for personal data, and a question carrying a false premise. Every reference answer was written and sourced by hand, with the date of the data and a note where sources conflict.</li>
+        <li><strong>I defined two scoring modes.</strong> Price questions cannot be scored on accuracy — the correct answer changes daily — so they are scored on honesty: does the model refuse to invent a live figure and point to a checkable source instead? Rule-based questions are scored on accuracy against my reference answer.</li>
+        <li><strong>The agent generated and pre-scored.</strong> 60 answers across two configurations (A = plain assistant, B = the same assistant given explicit compliance rules), then a first-pass score against the rubric, flagged for human review.</li>
+        <li><strong>The agent did not get the last word.</strong> A 20-answer sample is scored by me without seeing the AI scores; the agreement rate between the two decides how much of the machine scoring survives.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="flow">
+      <h2 class="subhead" id="flow">How it runs</h2>
+      <pre class="cs-flow">30 Indonesian questions + hand-written reference answers   (human)
+        ↓
+agent answers each question under configuration A and configuration B
+        ↓
+agent scores every answer against the rubric  →  relevance / accuracy / compliance / honesty / language
+        ↓
+human scores a 20-answer sample WITHOUT seeing the AI scores      (human)
+        ↓
+agreement rate between AI scorer and human scorer  →  decides whether the numbers are publishable
+        ↓
+failure taxonomy  →  concrete fix recommendations for the prompt</pre>
+    </section>
+
+    <section aria-labelledby="results">
+      <h2 class="subhead" id="results">Results — first run, 13 October 2026</h2>
+      <p class="cs-meta">60 answers generated, 0 failed calls, average 16.4 seconds and 2,729 characters per answer.</p>
+      <table class="cs-table">
+        <thead><tr><th>Metric</th><th>Configuration A (plain)</th><th>Configuration B (guarded)</th></tr></thead>
+        <tbody>
+          <tr><td>Answers scored</td><td>30</td><td>30</td></tr>
+          <tr><td>Average relevance (1–5)</td><td>4.23</td><td>4.23</td></tr>
+          <tr><td>Average factual accuracy (stable questions only)</td><td>3.88</td><td>3.96</td></tr>
+          <tr><td>Policy compliance pass rate</td><td>28 / 30 (93.3%)</td><td>29 / 30 (96.7%)</td></tr>
+          <tr><td>Honesty on price questions</td><td>30 / 30</td><td>30 / 30</td></tr>
+          <tr><td>Answers flagged with a failure category</td><td>9</td><td>6</td></tr>
+        </tbody>
+      </table>
+      <p>Failure taxonomy across both configurations: <em>unnatural Indonesian</em> 10 · <em>requested personal data</em> 2 · <em>invented a figure</em> 1 · <em>gave specific investment advice</em> 1 · <em>off-topic</em> 1.</p>
+
+      <h3 class="subhead">Three findings, including the ones that damage my own hypothesis</h3>
+      <ol class="plain-list">
+        <li><strong>The guardrails changed compliance by one answer in thirty.</strong> I expected the unguarded configuration to invent a live gold price. It did not: both configurations refused and pointed to sources. The honest reading is that this model is already trained to disclaim missing real-time data, so the added instruction had almost nothing left to fix on that axis.</li>
+        <li><strong>The one clear invention was not about price.</strong> For a question about delivery times — where my reference answer states plainly that no verifiable figure exists — configuration A produced specific delivery windows. The written rule did not prevent it; configuration B produced the same shape of answer. That is a prompt-design problem I have not solved yet.</li>
+        <li><strong>The largest failure category is the least trustworthy.</strong> 10 of the 19 flags are "unnatural Indonesian", which is the scorer's stylistic taste rather than a grounded criterion. This is exactly why the human sample exists, and it is the finding most likely to change once the sample is scored.</li>
+      </ol>
+      <p class="page__note">These are AI pre-scores, not verified results. The compliance and accuracy figures stay provisional until the 20-answer human sample is complete and the agreement rate is published alongside them.</p>
+    </section>
+
+    <section aria-labelledby="limits">
+      <h2 class="subhead" id="limits">Limitations</h2>
+      <ul class="plain-list">
+        <li>The rubric is my own construction, so it is subjective at the margins.</li>
+        <li>The first-pass scoring was done by one AI model using criteria it is also being judged against — a conflict worth naming rather than hiding.</li>
+        <li>Both configurations use the same underlying model and differ only in the system instruction, so nothing here generalises to other models or providers.</li>
+        <li>One human scorer only: there is no inter-rater reliability check.</li>
+        <li>30 questions is a small sample and cannot stand in for the whole Indonesian-speaking user population.</li>
+        <li>Security testing is out of scope. Jailbreaks and prompt injection are not measured.</li>
+        <li>No commercial outcome is measured. No time saving or revenue effect is claimed.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="artefacts">
+      <h2 class="subhead" id="artefacts">Artefacts</h2>
+      <ul class="plain-list">
+        <li><a href="projects/ai-evaluation/README.md">Full write-up (README)</a></li>
+        <li><a href="projects/ai-evaluation/ai_scores.csv">All 60 AI scores, per question and configuration</a></li>
+        <li><a href="projects/ai-evaluation/answers_raw.csv">All 60 generated answers</a></li>
+      </ul>
+      <p class="cs-meta">The scoring workbook itself is kept private because it contains the unreviewed human sample; the test questions, the answers and the machine scores are published above.</p>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Ahmad Saleh</p>
+    </footer>
+  </main>
+</body>
+</html>

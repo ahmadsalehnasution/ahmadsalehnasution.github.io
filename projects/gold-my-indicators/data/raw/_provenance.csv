@@ -1,0 +1,9 @@
+file,url,fetched,rows,note
+gold_daily_yahoo.csv,https://query1.finance.yahoo.com/v8/finance/chart/GC=F,2026-10-13,1258,"symbol=GC=F daily close, USD per troy ounce"
+fx_usd_myr_ecb.csv,https://api.frankfurter.dev/v1/2020-01-01..2026-10-13?base=USD&symbols=MYR,2026-10-13,1739,"ECB reference rate, business days only"
+cpi_headline.csv,https://api.data.gov.my/data-catalogue?id=cpi_headline&limit=200000&sort=date,2026-10-13,7840,monthly CPI index by division
+retail_trade.csv,https://api.data.gov.my/data-catalogue?id=iowrt&limit=200000&sort=date,2026-10-13,299,wholesale & retail trade; sales in RM million
+labour_force.csv,https://api.data.gov.my/data-catalogue?id=lfs_month&limit=200000&sort=date,2026-10-13,200,monthly labour force survey
+hh_income_state.csv,https://api.data.gov.my/data-catalogue?id=hh_income_state&limit=200000&sort=date,2026-10-13,319,"household income by state, 2-yearly"
+fuel_price.csv,https://api.data.gov.my/data-catalogue?id=fuelprice&limit=200000&sort=date,2026-10-13,963,"weekly pump price, RM per litre"
+bnm_usd_spot.csv,https://api.bnm.gov.my/public/exchange-rate?session=0900&quote=rm,2026-10-13,1,VALIDATION ONLY — official BNM spot rate on fetch date

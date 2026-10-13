@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indonesian market brief agent | Ahmad Saleh</title>
+  <meta name="description" content="Case study: an agent that produces a weekly Indonesian market brief where every figure traces to a page it actually fetched. Sources that fail to load are named as rejected, and nothing is published without human approval.">
+  <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .cs-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.95rem}
+    .cs-table th,.cs-table td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top}
+    .cs-table th{background:var(--accent-soft);font-weight:600}
+    .cs-flow{font-family:var(--font-mono);font-size:.83rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem;overflow-x:auto;white-space:pre;margin:1.25rem 0}
+    .badge{display:inline-block;padding:.15rem .55rem;border-radius:999px;background:var(--tag-bg);color:var(--tag-ink);font-size:.78rem;font-weight:600}
+    .cs-meta{color:var(--muted);font-size:.9rem;margin-top:.35rem}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main" class="page">
+    <a class="back-link" href="index.html#projects"><span aria-hidden="true">←</span> Ahmad Saleh</a>
+
+    <header class="page__head">
+      <p class="intro__eyebrow">Case study · 2026 · <span class="badge">Running weekly</span></p>
+      <h1 class="page__title">Indonesian market brief agent</h1>
+      <p class="page__lead">An agent that produces a weekly brief on the Indonesian gold market where every figure traces to a page it actually fetched. Claims whose sources fail to load are listed as rejected — never quoted from a search snippet — and nothing reaches anyone without human approval.</p>
+      <p class="cs-meta">Built and operated by me · runs on a weekly schedule · drafts only, nothing is published by the agent</p>
+    </header>
+
+    <section aria-labelledby="problem">
+      <h2 class="subhead" id="problem">The problem</h2>
+      <p>Monitoring the Indonesian gold market by hand means opening BPS, Bank Indonesia, Pegadaian and a few news sites, then reconciling figures that disagree and dates that do not line up. The expensive failure is not missing news — it is publishing a number that is stale or wrong. One out-of-date interest rate in a customer conversation does more damage than a week of missed headlines.</p>
+    </section>
+
+    <section aria-labelledby="role">
+      <h2 class="subhead" id="role">What the agent does, and what stays with me</h2>
+      <table class="cs-table">
+        <thead><tr><th>The agent</th><th>I</th></tr></thead>
+        <tbody>
+          <tr><td>Fetches BPS, Bank Indonesia, gold-price and media sources on a schedule</td><td>Set the topic scope and the review standard</td></tr>
+          <tr><td>Records claim → value → source → type → data date → fetch status</td><td>Approve, edit or reject the draft</td></tr>
+          <tr><td>Rejects any claim whose page failed to fetch, and states why</td><td>Decide what may be shared with customers</td></tr>
+          <tr><td>Drafts the brief in Indonesian and saves it to storage</td><td>Never delegate the publish decision to the agent</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="flow">
+      <h2 class="subhead" id="flow">How it runs</h2>
+      <pre class="cs-flow">weekly schedule (Monday 08:00 WIB)
+        ↓
+confirm the date → fetch in fixed order:
+   BPS inflation → BI price-index release → BI policy-rate indicator page
+   → central-bank FX rate → gold retail price (primary, else media citing it) → world spot price
+        ↓
+one row per claim:  claim | value | source | type | data date | fetch status
+        ├── page fetched and figure found in the text  ──►  eligible for the brief
+        └── page failed / figure absent               ──►  "sources rejected", with the reason
+        ↓
+derived figures computed only from fetched values, formula stated
+        ↓
+draft written (Indonesian, ≤1 page) → saved → delivered as DRAFT
+        ↓
+[APPROVAL GATE]  human approves, edits or rejects — the agent publishes nothing</pre>
+    </section>
+
+    <section aria-labelledby="results">
+      <h2 class="subhead" id="results">Results — first run, 13 October 2026</h2>
+      <table class="cs-table">
+        <thead><tr><th>Metric</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Source pages attempted</td><td>8</td></tr>
+          <tr><td>Claims published</td><td>8</td></tr>
+          <tr><td>Published claims traced to a page that was fetched and read</td><td>8 / 8 (100%)</td></tr>
+          <tr><td>Claims admitted from search snippets without fetching</td><td>0</td></tr>
+          <tr><td>Sources rejected before publication</td><td>3 (2 fetch failures, 1 JavaScript-rendered price table)</td></tr>
+          <tr><td>Stale-data errors caught by the date rule</td><td>1 — a policy-rate press release from four months earlier said 5.50% while the central bank's own indicator page showed 5.75% since 18 June 2026</td></tr>
+          <tr><td>Primary vs secondary sources in the citation table</td><td>6 primary, 2 secondary (labelled as such)</td></tr>
+          <tr><td>Published without human approval</td><td>0</td></tr>
+        </tbody>
+      </table>
+      <p>The beneficial claim here is deliberately narrow: <strong>error catch rate and traceability</strong>, not time saved. Manual preparation time was never measured, so no time-saving figure is claimed anywhere on this page.</p>
+      <p>The brief also states openly what it could not verify: the latest retail price for the gold product required was not available from a source that could be fetched, so the brief reports the last verified figure with its date instead of quietly quoting an unverified number.</p>
+    </section>
+
+    <section aria-labelledby="limits">
+      <h2 class="subhead" id="limits">Limitations</h2>
+      <ul class="plain-list">
+        <li>Scope is fixed to gold, consumer prices, the policy rate and one exchange rate. Tax, zakat and regulation are deliberately out of scope.</li>
+        <li>Two of eight sources failed to fetch, and the failing set will differ day to day — the brief cannot guarantee the freshest retail price.</li>
+        <li>The retail price comes from media citing the official page, not from the official page directly. Labelled secondary, but still second-hand.</li>
+        <li>Derived figures mix data dates (a 1 October retail price against a 12 October spot price) and are flagged as indicative; a strict comparison needs same-day inputs.</li>
+        <li>One human reviewer only, so there is no check on what counts as "verified".</li>
+        <li>The agent cannot detect a source that is itself wrong — it can only confirm that the figure is where the source says it is.</li>
+        <li>No cost control on the number of fetches per run, and no automatic detection when a source changes its URL scheme.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="artefacts">
+      <h2 class="subhead" id="artefacts">Artefacts</h2>
+      <ul class="plain-list">
+        <li><a href="projects/market-brief-agent/README.md">Full write-up (README)</a></li>
+        <li><a href="projects/market-brief-agent/briefs/2026-10-13-brief-pasar-emas-indonesia.md">The first brief produced, including its citation table and rejected sources</a></li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Ahmad Saleh</p>
+    </footer>
+  </main>
+</body>
+</html>

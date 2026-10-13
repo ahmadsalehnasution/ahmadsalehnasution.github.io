@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gold vs Malaysian household indicators | Ahmad Saleh</title>
+  <meta name="description" content="Case study: an eight-query SQL model in DuckDB joining the gold price in ringgit against Malaysian CPI, retail trade, household income and unemployment — with cross-source validation and stated limitations.">
+  <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .cs-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.95rem}
+    .cs-table th,.cs-table td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top}
+    .cs-table th{background:var(--accent-soft);font-weight:600}
+    .cs-flow{font-family:var(--font-mono);font-size:.83rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem;overflow-x:auto;white-space:pre;margin:1.25rem 0}
+    .badge{display:inline-block;padding:.15rem .55rem;border-radius:999px;background:var(--tag-bg);color:var(--tag-ink);font-size:.78rem;font-weight:600}
+    .cs-meta{color:var(--muted);font-size:.9rem;margin-top:.35rem}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main" class="page">
+    <a class="back-link" href="index.html#projects"><span aria-hidden="true">←</span> Ahmad Saleh</a>
+
+    <header class="page__head">
+      <p class="intro__eyebrow">Case study · 2026 · <span class="badge">Prototype</span></p>
+      <h1 class="page__title">Gold vs Malaysian household indicators</h1>
+      <p class="page__lead">An eight-query SQL model in DuckDB that joins the gold price in ringgit against Malaysian consumer prices, retail trade, household income and unemployment — to test the claim that gold protects a household's purchasing power, and to show where that claim stops holding.</p>
+      <p class="cs-meta">Public data only · every published figure produced by a query in this repository · cross-source validation before publication</p>
+    </header>
+
+    <section aria-labelledby="problem">
+      <h2 class="subhead" id="problem">The problem</h2>
+      <p>Gold is sold in Malaysia as an inflation hedge, and the pitch is usually just "the price keeps going up". That claim is only testable against a household's own numbers: how fast are consumer prices actually rising, what does a gram cost relative to a median monthly income, and how much of the rise is the gold price rather than the ringgit. A retailer who can answer those three questions sells — and prices — differently.</p>
+    </section>
+
+    <section aria-labelledby="role">
+      <h2 class="subhead" id="role">What I did, and what the agent did</h2>
+      <ul class="plain-list">
+        <li><strong>I set the question and chose the sources.</strong> Malaysian public data from <a href="https://data.gov.my" target="_blank" rel="noopener">data.gov.my</a> (OpenDOSM), daily gold futures prices and European Central Bank reference rates. Sources that blocked automated access were dropped rather than scraped by hand.</li>
+        <li><strong>The agent built the pipeline.</strong> Fetch, load into DuckDB, write the query framework, run everything, render the result tables, and flag data-quality problems such as partial months.</li>
+        <li><strong>I wrote the validation check and read the results critically.</strong> A correlation of 0.944 between the gold price and retail sales appears in query 07 — it is an artefact of two upward trends and demonstrates nothing causal. Catching that is my job, not the agent's.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="flow">
+      <h2 class="subhead" id="flow">How it runs</h2>
+      <pre class="cs-flow">fetch raw            gold (daily close, USD/oz)   ECB reference rates   OpenDOSM: CPI, retail,
+  ~2.5 s             │                            │                     labour, income, fuel
+                     └──────────────┬─────────────┘                     │
+                                    ▼                                   │
+              staging tables, one row per calendar month ◄──────────────┘
+                                    ▼
+        mart_gold_myr_monthly :  USD/oz × USD/MYR ÷ 31.1034768 = RM per gram
+                                    ▼
+        mart_monthly : gold, CPI, retail, unemployment and fuel on one monthly row
+                                    ▼
+        mart_affordability : annual gold price ÷ median monthly household income, by state
+                                    ▼
+        sql/q01…q08  →  results/*.csv  →  RESULTS.md
+                    ▲
+                    └── q08_validation.sql cross-checks the ECB rate against Bank Negara's own spot rate</pre>
+    </section>
+
+    <section aria-labelledby="results">
+      <h2 class="subhead" id="results">Results</h2>
+      <table class="cs-table">
+        <thead><tr><th>Finding</th><th>Figure</th><th>Source query</th></tr></thead>
+        <tbody>
+          <tr><td>A gram of gold in ringgit, Oct 2021 → Oct 2026</td><td>RM239.38 → RM548.80 (+129.3%)</td><td>q02</td></tr>
+          <tr><td>Malaysian consumer prices over the same period</td><td>+12.6% (CPI 122.1 → 137.5)</td><td>q01</td></tr>
+          <tr><td>Months where gold beat inflation since Oct 2022</td><td>47 of 47</td><td>q03</td></tr>
+          <tr><td>Real return by year, ranked</td><td>2026 +33.2 · 2025 +33.1 · 2024 +20.9 · 2023 +10.0 · 2022 +1.4 (percentage points)</td><td>q05</td></tr>
+          <tr><td>Peak and current drawdown</td><td>peak RM633.41/g (Feb 2026); latest month 13.4% below it</td><td>q04</td></tr>
+          <tr><td>Cost of one gram as a share of median monthly household income (2024)</td><td>3.26% in Kuala Lumpur vs 8.63% in Kelantan</td><td>q06</td></tr>
+          <tr><td>Cross-source validation of the exchange rate</td><td>ECB 4.086 vs Bank Negara spot 4.0875 (0.04% apart)</td><td>q08</td></tr>
+          <tr><td>Full refresh time, measured</td><td>2.5 s fetch + 0.6 s build and query = 3.1 s</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <p>The most useful output is not the headline return. It is that the same series everyone calls a safe haven gave back an eighth of its value in the eight months after its peak — and that affordability is 2.6× harder for a median household in Kelantan than in Kuala Lumpur, for an identical product.</p>
+    </section>
+
+    <section aria-labelledby="limits">
+      <h2 class="subhead" id="limits">Limitations</h2>
+      <ul class="plain-list">
+        <li>The gold series is COMEX futures, not the Malaysian retail price. Dealer premiums and buy/sell spreads are not included, so this is the international price converted to ringgit — not what a walk-in customer pays.</li>
+        <li>Part of the ringgit gain is ringgit weakness, not a stronger gold market. A USD-denominated version of the same queries is the next step and is not done yet.</li>
+        <li>Household income comes from a two-yearly survey (latest 2024) joined onto a monthly price series, so the affordability figures are indicative and 2025–2026 affordability is estimated on a 2024 income baseline.</li>
+        <li>A correlation of 0.944 between gold and retail sales is not evidence of anything: both series trend upward. Differenced or seasonally adjusted series would be needed for a real test.</li>
+        <li>No transaction costs, taxes or zakat are modelled, so the real return shown is a price return only.</li>
+        <li>The current month is partial at fetch time (9 trading days) and is flagged in the data-quality column rather than compared against full months.</li>
+        <li>No commercial outcome is measured. No revenue or conversion claim is made.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="artefacts">
+      <h2 class="subhead" id="artefacts">Artefacts</h2>
+      <ul class="plain-list">
+        <li><a href="projects/gold-my-indicators/README.md">Full write-up (README)</a></li>
+        <li><a href="projects/gold-my-indicators/results/RESULTS.md">Every result table, generated by the queries</a></li>
+        <li><a href="projects/gold-my-indicators/sql/">The eight SQL files</a> — one business question per file, the SQL concept named in the header comment</li>
+        <li><a href="projects/gold-my-indicators/data/raw/_provenance.csv">Source provenance: URL, fetch date and row count for every input file</a></li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Ahmad Saleh</p>
+    </footer>
+  </main>
+</body>
+</html>
