@@ -15,9 +15,17 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
 
-    sections.forEach(function (el) { revealObserver.observe(el); });
+    sections.forEach(function (el) {
+      // Anything already on screen at load is shown at once, so content
+      // never waits on a delayed observer callback.
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        el.classList.add("is-visible");
+      } else {
+        revealObserver.observe(el);
+      }
+    });
   } else {
     sections.forEach(function (el) { el.classList.add("is-visible"); });
   }
