@@ -160,13 +160,13 @@ a:hover { text-decoration: underline; }
 
 .nav a {
   display: block;
-  padding: .45rem 0 .45rem 1rem;
+  padding: .45rem 0 .45rem 1.25rem;
   position: relative;
   color: var(--muted);
   font-size: .92rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color .2s ease;
+  transition: color .2s ease, padding-left .25s ease;
 }
 
 .nav a::before {
@@ -183,6 +183,8 @@ a:hover { text-decoration: underline; }
 
 .nav a:hover,
 .nav a[aria-current="true"] { color: var(--ink); }
+
+.nav a[aria-current="true"] { padding-left: 3rem; }
 
 .nav a[aria-current="true"]::before {
   width: 2.25rem;
@@ -658,7 +660,7 @@ a:hover { text-decoration: underline; }
   }
   .nav a { padding: .3rem 0; }
   .nav a::before { display: none; }
-  .nav a[aria-current="true"] { color: var(--accent); }
+  .nav a[aria-current="true"] { color: var(--accent); padding-left: 0; }
   .nav { margin-top: 1.75rem; }
 }
 
