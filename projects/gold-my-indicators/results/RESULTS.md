@@ -218,3 +218,40 @@ Database: `gold_my.duckdb` · Basis data mentah: `data/raw/` · Semua angka di b
 | months in the gold mart | 61 |
 | CPI divisions covered | 14 |
 | ECB vs BNM spot (MYR per USD) | ECB 4.086 vs BNM 4.0875 |
+
+## q09_usd_decomposition.sql  (6 baris)
+
+**Is the ringgit doing the work?** Gold is priced in dollars and bought in ringgit, so deflating to a third currency
+separates the metal from the currency. `metal_only_contribution_pct` is the ringgit return with the currency effect
+subtracted — the part the metal alone would have delivered.
+
+| yr | months_counted | gold_usd_g | gold_myr_g | usd_myr | gold_usd_yoy_pct | fx_effect_pct | gold_myr_yoy_pct | metal_only_contribution_pct |
+|---|---|---|---|---|---|---|---|---|
+| 2021 | 3 | 57.88 | 242.19 | 4.1846 |  |  |  |  |
+| 2022 | 12 | 58.03 | 254.95 | 4.3998 | 0.3 | 5.1 | 5.3 | 0.1 |
+| 2023 | 12 | 62.84 | 286.63 | 4.5601 | 8.3 | 3.6 | 12.4 | 8.8 |
+| 2024 | 12 | 77.2 | 352.22 | 4.5761 | 22.9 | 0.4 | 22.9 | 22.5 |
+| 2025 | 12 | 111.21 | 474.72 | 4.2835 | 44.1 | -6.4 | 34.8 | 41.2 |
+| 2026 | 9 | 147.01 | 589.2 | 4.0113 | 32.2 | -6.4 | 24.1 | 30.5 |
+
+Reading it: in **2022 the metal contributed 0.1 points of a 5.3% ringgit return** — the entire gain was the ringgit.
+By 2025–2026 the relationship reverses: the metal adds 30–41 points while the currency costs 6 points each year.
+
+## q10_fx_subperiods.sql  (4 baris)
+
+**Did the currency effect persist, or was it a phase?** Sub-periods taken from the actual path of USD/MYR.
+`fx_share_of_return_pp` is how many percentage points of the ringgit return came from the currency;
+`myr_price_if_fx_flat` is the counterfactual price had the exchange rate never moved.
+
+| scope | period | gold_usd_g_start | gold_usd_g_end | usd_myr_start | usd_myr_end | gold_usd_return_pct | fx_effect_pct | gold_myr_return_pct | fx_share_of_return_pp | myr_price_if_fx_flat |
+|---|---|---|---|---|---|---|---|---|---|---|
+| full window | 2021-11 to 2026-09 | 58.51 | 140.35 | 4.1789 | 4.0704 | 139.9 | -2.6 | 133.6 | -6.2 | 586.5 |
+| ringgit weakening | 2021-11 to 2024-02 | 58.51 | 65.55 | 4.1789 | 4.7679 | 12.0 | 14.1 | 27.8 | 15.8 | 273.92 |
+| ringgit strengthening | 2024-02 to 2026-02 | 65.55 | 161.9 | 4.7679 | 3.9124 | 147.0 | -17.9 | 102.7 | -44.3 | 771.9 |
+| recent rebound | 2026-02 to 2026-09 | 161.9 | 140.35 | 3.9124 | 4.0704 | -13.3 | 4.0 | -9.8 | 3.5 | 549.11 |
+
+Reading it: over the **full window the ringgit contributed −2.6%** — it slightly *reduced* the return, and gold would
+have cost RM586.50/g against the RM571.28/g actually recorded in September 2026. The currency only carried the
+return during the weakening phase (2021-11 to 2024-02, +14.1% of the +27.8% total), and cost 17.9% during the
+strengthening phase that followed. **"Gold protects you from a weak ringgit" is therefore period-dependent, not a
+structural property** — which is the opposite of what the retail sales pitch assumes.

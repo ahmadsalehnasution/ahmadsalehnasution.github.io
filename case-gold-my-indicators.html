@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gold vs Malaysian household indicators | Ahmad Saleh</title>
-  <meta name="description" content="Case study: an eight-query SQL model in DuckDB joining the gold price in ringgit against Malaysian CPI, retail trade, household income and unemployment — with cross-source validation and stated limitations.">
+  <meta name="description" content="Case study: a ten-query SQL model in DuckDB joining the gold price in ringgit against Malaysian CPI, retail trade, household income and unemployment — including a currency decomposition that reverses the usual gold-sales pitch.">
   <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="assets/favicon.png" type="image/png">
@@ -87,10 +87,29 @@
     </section>
 
     <section aria-labelledby="limits">
+      <h2 class="subhead" id="currency">Is it gold, or is it the ringgit?</h2>
+      <p>The obvious objection to everything above is that gold is priced in dollars and bought in ringgit — so how much of that rise is the metal, and how much is a weak ringgit? Deflating the series to a third currency answers it, and the answer runs against the usual sales pitch.</p>
+      <table class="cs-table">
+        <thead><tr><th>Period</th><th>Gold in USD</th><th>Currency effect</th><th>Gold in MYR</th><th>What it means</th></tr></thead>
+        <tbody>
+          <tr><td>Nov 2021 → Sep 2026 (full)</td><td>+139.9%</td><td>−2.6%</td><td>+133.6%</td><td>The ringgit slightly <em>reduced</em> the return over five years</td></tr>
+          <tr><td>2021-11 → 2024-02 (ringgit weakening)</td><td>+12.0%</td><td>+14.1%</td><td>+27.8%</td><td>More than half the gain was currency</td></tr>
+          <tr><td>2024-02 → 2026-02 (ringgit strengthening)</td><td>+147.0%</td><td>−17.9%</td><td>+102.7%</td><td>The currency gave 17.9 points back</td></tr>
+          <tr><td>2022 alone (yearly averages)</td><td>+0.3%</td><td>+5.1%</td><td>+5.3%</td><td>The metal contributed 0.1 points of a 5.3% return</td></tr>
+        </tbody>
+      </table>
+      <p>
+        So the honest sentence is: <strong>gold's protection against a weak ringgit is period-dependent, not a
+        structural property.</strong> In 2022 it was almost entirely currency. Had the exchange rate never moved
+        from its November 2021 level, gold would have cost RM586.50 a gram in September 2026 rather than the
+        RM571.28 actually recorded — the ringgit story would have been <em>worse</em> than no story at all.
+      </p>
+      <p class="cs-meta">Method: average gold (USD/gram) and USD/MYR per year and per named sub-period, partial months excluded; the identity (1 + ringgit return) = (1 + dollar return) × (1 + currency effect). Queries <code>q09_usd_decomposition.sql</code> and <code>q10_fx_subperiods.sql</code>, one business question per file.</p>
+
       <h2 class="subhead" id="limits">Limitations</h2>
       <ul class="plain-list">
         <li>The gold series is COMEX futures, not the Malaysian retail price. Dealer premiums and buy/sell spreads are not included, so this is the international price converted to ringgit — not what a walk-in customer pays.</li>
-        <li>Part of the ringgit gain is ringgit weakness, not a stronger gold market. A USD-denominated version of the same queries is the next step and is not done yet.</li>
+        <li>Part of the ringgit gain could have been ringgit weakness rather than a stronger gold market — <strong>this was tested and the answer is above</strong>: over the full window the currency contributed nothing (−2.6%), but in 2022 it supplied almost the entire return. The decomposition covers currency only; it does not separate gold's own drivers (rates, central-bank demand, ETF flows).</li>
         <li>Household income comes from a two-yearly survey (latest 2024) joined onto a monthly price series, so the affordability figures are indicative and 2025–2026 affordability is estimated on a 2024 income baseline.</li>
         <li>A correlation of 0.944 between gold and retail sales is not evidence of anything: both series trend upward. Differenced or seasonally adjusted series would be needed for a real test.</li>
         <li>No transaction costs, taxes or zakat are modelled, so the real return shown is a price return only.</li>

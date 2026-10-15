@@ -1,6 +1,6 @@
 # Gold vs Malaysian Household Indicators
 
-**Status: prototype.** A reproducible SQL + BI analysis, not a production system. Every number below is produced by
+**Status: prototype.** A reproducible SQL + BI analysis (ten queries), not a production system. Every number below is produced by
 the queries in `sql/` from the raw files in `data/raw/`; nothing is typed in by hand.
 
 ## Business problem
@@ -90,6 +90,18 @@ on the exchange rate: the ECB reference rate on the fetch date was **4.086 MYR/U
 official spot rate of **4.0875** — a 0.04% gap, so the FX series is fit to convert prices with. The same query also
 reports month coverage (9–23 trading days) and flags that the current month is partial.
 
+### Is it gold, or is it the ringgit?
+
+`q09` and `q10` split the ringgit return into the metal and the currency. The result contradicts the usual pitch:
+over the full window (Nov 2021 to Sep 2026) gold rose **139.9% in dollars but 133.6% in ringgit** — the ringgit
+contributed **−2.6%**, and gold would have cost RM586.50/g instead of RM571.28/g had the exchange rate never moved.
+In 2022 it was the reverse: the metal contributed just **0.1 points** of a 5.3% ringgit return, so that year's gain
+was almost entirely currency. The currency carried the return only during the weakening phase (2021-11 to 2024-02)
+and gave back 17.9% during the strengthening phase that followed.
+
+**"Gold protects you from a weak ringgit" is period-dependent, not structural.** That is the finding a Malaysian
+retailer should price and message around — and it is a claim this project can defend with a query.
+
 ## Limitations
 
 - **Gold data is COMEX futures (`GC=F`), not the Malaysian retail price.** Retail gold carries a dealer premium and
@@ -117,7 +129,7 @@ reports month coverage (9–23 trading days) and flags that the current month is
 ```
 01_fetch.py            fetch raw data + write provenance
 02_build_and_query.py  build gold_my.duckdb, write sql/*.sql, run queries, render results/RESULTS.md
-sql/q01…q08.sql        the query framework: one business question per file, SQL concept in the header comment
+sql/q01…q10.sql        the query framework: one business question per file, SQL concept in the header comment
 results/*.csv          one CSV per query + RESULTS.md (all tables rendered)
 data/raw/*.csv         raw inputs + _provenance.csv
 ```

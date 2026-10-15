@@ -1,0 +1,5 @@
+scope,period,gold_usd_g_start,gold_usd_g_end,usd_myr_start,usd_myr_end,gold_usd_return_pct,fx_effect_pct,gold_myr_return_pct,fx_share_of_return_pp,myr_price_if_fx_flat
+full window,2021-11 to 2026-09,58.51,140.35,4.1789,4.0704,139.9,-2.6,133.6,-6.2,586.5
+ringgit weakening,2021-11 to 2024-02,58.51,65.55,4.1789,4.7679,12.0,14.1,27.8,15.8,273.92
+ringgit strengthening,2024-02 to 2026-02,65.55,161.9,4.7679,3.9124,147.0,-17.9,102.7,-44.3,771.9
+recent rebound,2026-02 to 2026-09,161.9,140.35,3.9124,4.0704,-13.3,4.0,-9.8,3.5,549.11
