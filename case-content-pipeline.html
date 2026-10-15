@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Running a multi-channel publishing operation with scheduled agents | Ahmad Saleh</title>
+  <meta name="description" content="A ten-workflow agent operation publishing to WordPress, LinkedIn, Facebook, Instagram and TikTok: architecture, real numbers, the day five runs died, and what I cannot claim.">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back-link" href="index.html#projects">&larr; All projects</a>
+
+    <header class="page__head">
+      <p class="eyebrow">Case study · 2026 · <strong>Production — my own business</strong></p>
+      <h1 class="page__title">Running a multi-channel publishing operation with scheduled agents</h1>
+      <p class="page__lead">
+        Ten scheduled agent workflows that research, draft, illustrate and publish content across five channels for
+        Sukses Dengan Emas, my own gold-savings brand. It runs without me watching it, it writes into systems that
+        are not mine, and it has a human approval gate before anything goes public.
+      </p>
+    </header>
+
+    <style>
+      .cs-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.95rem}
+      .cs-table th,.cs-table td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top}
+      .cs-table th{background:var(--tag-bg);font-weight:600}
+      .cs-flow{font-family:var(--font-mono,monospace);font-size:.85rem;line-height:1.55;background:var(--tag-bg);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;overflow-x:auto;white-space:pre}
+      .cs-note{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1.25rem 0;color:var(--muted)}
+      .cs-meta{color:var(--muted);font-size:.92rem}
+      .badge{display:inline-block;padding:.15rem .6rem;border-radius:999px;background:var(--tag-bg);color:var(--tag-ink,inherit);font-size:.78rem;font-weight:600}
+    </style>
+
+    <h2 class="subhead">The problem</h2>
+    <p>
+      My brand publishes daily: an article on the website, an Instagram and Facebook post in the morning and again in
+      the afternoon, a LinkedIn piece, and a TikTok caption on weekdays. Done by hand that is most of a working day,
+      every day, and it stops the moment I get busy — which is exactly when a content business cannot afford to stop.
+      The specific problem was not "I want AI to write for me". It was: <strong>how do I keep a five-channel publishing
+      schedule running at a consistent standard without spending my day on it, and without publishing anything I
+      have not approved?</strong>
+    </p>
+
+    <h2 class="subhead">What I designed, and what the agents do</h2>
+    <p>The split matters more than the tooling, so I state it plainly:</p>
+    <table class="cs-table">
+      <thead><tr><th>Mine</th><th>The agents'</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>
+            Designing the ten workflows and what each one is allowed to touch. Writing nine operating procedures the
+            agents load before working. Defining each agent's persona, instructions and boundaries. Choosing to route
+            publishing through MCP servers rather than screen automation. Setting the approval gate: nothing is
+            published without my review. Diagnosing failures.
+          </td>
+          <td>
+            Daily news and trend research for three feeds (evergreen financial, viral, IT &amp; AI). Drafting
+            SEO-formatted Indonesian articles. Writing social copy per channel. Generating the accompanying images.
+            Publishing to WordPress, LinkedIn, Facebook, Instagram and TikTok at their scheduled times.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="subhead">How it runs</h2>
+    <pre class="cs-flow">  research (3 daily feeds: evergreen · viral · IT &amp; AI)
+        │
+        ▼
+  drafting  ──  SEO article  ·  IG/FB copy  ·  LinkedIn  ·  TikTok caption
+        │
+        ▼
+  visual asset generation
+        │
+        ▼
+  ┌─────────────────────────────────────────────────────────────┐
+  │  human approval gate — nothing publishes without my review  │
+  └─────────────────────────────────────────────────────────────┘
+        │
+        ▼
+  MCP integrations ──►  WordPress (site)   Buffer (IG · FB · LinkedIn)   Metricool (analytics)
+        │
+        ▼
+  scheduled: 10 workflows, roughly 10 runs a day</pre>
+
+    <h2 class="subhead">Results — numbers I can point at</h2>
+    <table class="cs-table">
+      <thead><tr><th>Measure</th><th>Value</th><th>How you can check it</th></tr></thead>
+      <tbody>
+        <tr><td>Articles published on the site</td><td><strong>434</strong></td><td>WordPress REST API reports it (<code>X-WP-Total</code>); the same endpoint is public, so anyone can query it</td></tr>
+        <tr><td>Scheduled workflows</td><td>10</td><td>Registered individually, each with its own schedule</td></tr>
+        <tr><td>Runs, 5–15 October 2026</td><td>99</td><td>Logged per run with start time, end time and outcome</td></tr>
+        <tr><td>Completed runs</td><td>94 of 99 (95%)</td><td>Same log. The five failures are in the incident section below, not hidden</td></tr>
+        <tr><td>Typical daily throughput</td><td>~10 runs/day</td><td>Consistent across eleven consecutive days</td></tr>
+        <tr><td>Channel integrations</td><td>3 MCP servers</td><td>WordPress, Buffer, Metricool — real APIs, not screen automation</td></tr>
+        <tr><td>Written operating procedures</td><td>9</td><td>Loaded by the agents before each run</td></tr>
+      </tbody>
+    </table>
+    <p class="cs-meta">
+      Scope note: 434 is every article on the site, including material published before the automation existed. The
+      runs dated 13–14 October 2026 are the automated ones I am claiming.
+    </p>
+
+    <h2 class="subhead">The day five runs died — and what I did about it</h2>
+    <p>
+      On 15 October 2026 five scheduled runs failed between 00:00 and 02:25. Each logged the same error: the model
+      provider had stopped responding, and the runtime aborted the call after five to seven unanswered attempts. No
+      articles, no posts — the publishing schedule that day produced nothing.
+    </p>
+    <ol class="plain-list">
+      <li><strong>Read the logs before guessing.</strong> The five failures shared one signature, so the content was not the problem and the schedules were not the problem.</li>
+      <li><strong>Tested the provider directly, outside the workflow.</strong> A minimal API call proved the provider was answering some requests and abandoning others — intermittent congestion, not a broken key or a bad request. A second model on the same provider answered every probe.</li>
+      <li><strong>Split the fix three ways.</strong> Pin the scheduled workflows to the model that answers reliably (the interactive sessions keep the faster one, which is fine because a human notices a stall and a cron job does not). Bound every job's work — a maximum tool-call budget, a two-strike rule for unreachable sources, and an instruction to deliver partial results rather than retry forever. And add a backup run later in the day that checks whether the day's output already exists and only works if it does not.</li>
+    </ol>
+    <p class="cs-note">
+      This is the part of agent operations I would want to talk about in an interview: unattended systems fail most
+      often at the boundary you do not own — the model provider, the third-party API, the network. Designing for that
+      boundary is a different skill from writing the prompt.
+    </p>
+
+    <h2 class="subhead">Limitations — stated, not buried</h2>
+    <ul class="plain-list">
+      <li><strong>Single user, own business.</strong> No multi-tenant design, no team, no service level agreement. I am the only operator and the only approver.</li>
+      <li><strong>I have not measured the time saved.</strong> I can count runs and published articles. I cannot honestly convert that into hours saved, because I never logged the manual baseline.</li>
+      <li><strong>Human approval is a real gate, and a bottleneck.</strong> Nothing publishes without my review, which means throughput is capped by my attention. Review time is not logged, so I cannot quote it.</li>
+      <li><strong>Failures at the provider boundary are expected, not exceptional.</strong> The mitigation reduces the blast radius; it does not remove the dependency.</li>
+      <li><strong>Model capability is the ceiling on quality.</strong> The agents follow procedure well and still produce work I edit. I would not represent its output as publication-ready without review.</li>
+      <li><strong>No machine learning.</strong> Nothing here trains or fine-tunes a model. The skill is agent configuration, orchestration, verification and incident handling.</li>
+    </ul>
+
+    <h2 class="subhead">Artefacts</h2>
+    <ul class="plain-list">
+      <li><strong>The output itself</strong> — <a href="https://suksesdenganemas.com/" target="_blank" rel="noopener">suksesdenganemas.com</a>, 434 published articles, public REST endpoint.</li>
+      <li><strong>Nine operating procedures</strong> — the written instructions each workflow loads. Not published here; walkthrough available on request.</li>
+      <li><strong>Run logs</strong> — every execution recorded with start, finish and outcome. Available on request.</li>
+      <li><strong>Related work</strong> — <a href="case-market-brief-agent.html">the market-brief agent</a> applies the same discipline (source verification, published limitations) to Indonesian gold prices, and <a href="case-ai-evaluation.html">the response-quality evaluation</a> measures model output with a rubric instead of impressions.</li>
+    </ul>
+
+    <p class="page__note">
+      Status: <span class="badge">Production</span> — running in my own business since October 2026. Single user,
+      no SLA. Nothing on this page is a claim about employer-scale production experience.
+    </p>
+
+    <p><a class="back-link" href="index.html#projects">&larr; Back to projects</a></p>
+
+    <footer class="footer">
+      <p class="cs-meta">Ahmad Saleh · Data, BI &amp; AI Operations · Selangor, Malaysia</p>
+    </footer>
+  </main>
+</body>
+</html>
