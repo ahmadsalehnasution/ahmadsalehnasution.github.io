@@ -6,9 +6,11 @@ Static HTML, plain CSS, no build step. Served by GitHub Pages from `main`.
 ## Layout
 
 - `index.html` — single-page profile: about, experience, projects, certifications, research, contact
+- `case-content-pipeline.html` — 2026 case study: a production content-pipeline agent operation across five channels
 - `case-ai-evaluation.html` — 2026 case study: evaluating AI answers in Indonesian (60 answers, two configurations)
 - `case-gold-my-indicators.html` — 2026 case study: SQL + BI analysis of gold versus Malaysian household indicators
 - `case-market-brief-agent.html` — 2026 case study: an agent that writes a cited weekly market brief
+- `case-kb-chatbot.html` — 2026 case study: retrieval-augmented chatbot with citations and a refusal path
 - `resume.pdf` — the current CV (Data & BI Analyst variant)
 - `projects/<slug>/` — the artefacts behind each case study: SQL files, result tables, source provenance, READMEs
 - `assets/` — stylesheet, script, favicon

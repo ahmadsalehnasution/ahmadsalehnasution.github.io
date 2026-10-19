@@ -1,0 +1,399 @@
+{
+  "summary": {
+    "corpus_articles": 12,
+    "in_scope_questions": 30,
+    "out_of_scope_questions": 10,
+    "threshold": 4.5,
+    "k": 3,
+    "top1_hit_rate": 0.9333,
+    "top3_hit_rate": 0.9667,
+    "answered_rate_in_scope": 1.0,
+    "false_rejection_rate": 0.0,
+    "out_of_scope_rejection_rate": 1.0,
+    "false_acceptance_rate": 0.0,
+    "in_scope_scores": {
+      "min": 5.254,
+      "median": 9.385,
+      "max": 19.577
+    },
+    "out_of_scope_scores": {
+      "min": 0.0,
+      "median": 1.418,
+      "max": 4.211
+    }
+  },
+  "in_scope": [
+    {
+      "id": "q01",
+      "question": "Bagaimana cara membaca harga emas agar tidak salah membeli?",
+      "gold_slug": "cara-membaca-harga-emas",
+      "top1": "cara-membaca-harga-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 6.153
+    },
+    {
+      "id": "q02",
+      "question": "Dalam satuan apa harga emas biasanya ditampilkan?",
+      "gold_slug": "cara-membaca-harga-emas",
+      "top1": "cara-membaca-harga-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 9.941
+    },
+    {
+      "id": "q03",
+      "question": "Apa saja yang menyebabkan harga antar produk emas bisa berbeda?",
+      "gold_slug": "cara-membaca-harga-emas",
+      "top1": "cara-membaca-harga-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 5.745
+    },
+    {
+      "id": "q04",
+      "question": "Apa itu spread harga emas?",
+      "gold_slug": "spread-harga-beli-dan-jual-emas",
+      "top1": "spread-harga-beli-dan-jual-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 5.254
+    },
+    {
+      "id": "q05",
+      "question": "Apa beda harga beli dan harga jual kembali buyback emas?",
+      "gold_slug": "spread-harga-beli-dan-jual-emas",
+      "top1": "spread-harga-beli-dan-jual-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 7.686
+    },
+    {
+      "id": "q06",
+      "question": "Mengapa emas lebih cocok sebagai aset jangka menengah hingga panjang?",
+      "gold_slug": "spread-harga-beli-dan-jual-emas",
+      "top1": "cara-membaca-harga-emas",
+      "top1_hit": false,
+      "top3_hits": false,
+      "answered": true,
+      "score": 5.835
+    },
+    {
+      "id": "q07",
+      "question": "Apa itu kadar kemurnian emas?",
+      "gold_slug": "kadar-kemurnian-emas",
+      "top1": "kadar-kemurnian-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 6.587
+    },
+    {
+      "id": "q08",
+      "question": "Bagaimana cara menyatakan kadar kemurnian emas dalam karat dan persen?",
+      "gold_slug": "kadar-kemurnian-emas",
+      "top1": "kadar-kemurnian-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 9.633
+    },
+    {
+      "id": "q09",
+      "question": "Apa yang dimaksud dengan emas 24 karat?",
+      "gold_slug": "emas-24-karat",
+      "top1": "emas-24-karat",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 7.677
+    },
+    {
+      "id": "q10",
+      "question": "Berapa persen kandungan emas murni pada emas 24 karat?",
+      "gold_slug": "emas-24-karat",
+      "top1": "emas-24-karat",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 13.2
+    },
+    {
+      "id": "q11",
+      "question": "Kenapa emas 24 karat jarang dipakai untuk perhiasan harian?",
+      "gold_slug": "emas-24-karat",
+      "top1": "kadar-kemurnian-emas",
+      "top1_hit": false,
+      "top3_hits": true,
+      "answered": true,
+      "score": 12.897
+    },
+    {
+      "id": "q12",
+      "question": "Bagaimana cara membedakan emas asli dan emas palsu?",
+      "gold_slug": "cara-membedakan-emas-asli-dan-palsu",
+      "top1": "cara-membedakan-emas-asli-dan-palsu",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 15.641
+    },
+    {
+      "id": "q13",
+      "question": "Apa risiko finansial jika salah membeli emas palsu?",
+      "gold_slug": "cara-membedakan-emas-asli-dan-palsu",
+      "top1": "cara-membedakan-emas-asli-dan-palsu",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 9.586
+    },
+    {
+      "id": "q14",
+      "question": "Apa saja ciri fisik emas asli yang bisa dicek sebelum membeli?",
+      "gold_slug": "cara-membedakan-emas-asli-dan-palsu",
+      "top1": "cara-membedakan-emas-asli-dan-palsu",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 14.993
+    },
+    {
+      "id": "q15",
+      "question": "Kapan emas yang dimiliki menjadi wajib dizakati?",
+      "gold_slug": "zakat-emas-cara-hitung-nisab",
+      "top1": "zakat-emas-cara-hitung-nisab",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 8.952
+    },
+    {
+      "id": "q16",
+      "question": "Apa itu nisab zakat emas?",
+      "gold_slug": "zakat-emas-cara-hitung-nisab",
+      "top1": "zakat-emas-cara-hitung-nisab",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 9.177
+    },
+    {
+      "id": "q17",
+      "question": "Berapa lama masa haul kepemilikan emas agar wajib dikeluarkan zakatnya?",
+      "gold_slug": "zakat-emas-cara-hitung-nisab",
+      "top1": "zakat-emas-cara-hitung-nisab",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 12.975
+    },
+    {
+      "id": "q18",
+      "question": "Bagaimana cara menabung emas dengan modal kecil?",
+      "gold_slug": "menabung-emas-modal-kecil",
+      "top1": "menabung-emas-modal-kecil",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 8.569
+    },
+    {
+      "id": "q19",
+      "question": "Apakah menabung emas membutuhkan modal yang besar?",
+      "gold_slug": "menabung-emas-modal-kecil",
+      "top1": "menabung-emas-modal-kecil",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 9.184
+    },
+    {
+      "id": "q20",
+      "question": "Apa itu strategi dollar cost averaging untuk emas?",
+      "gold_slug": "dollar-cost-averaging-emas-cara-investasi",
+      "top1": "dollar-cost-averaging-emas-cara-investasi",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 15.441
+    },
+    {
+      "id": "q21",
+      "question": "Bagaimana strategi dollar cost averaging bekerja saat harga emas naik dan turun?",
+      "gold_slug": "dollar-cost-averaging-emas-cara-investasi",
+      "top1": "dollar-cost-averaging-emas-cara-investasi",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 19.577
+    },
+    {
+      "id": "q22",
+      "question": "Siapa yang cocok memakai strategi dollar cost averaging?",
+      "gold_slug": "dollar-cost-averaging-emas-cara-investasi",
+      "top1": "dollar-cost-averaging-emas-cara-investasi",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 16.131
+    },
+    {
+      "id": "q23",
+      "question": "Apakah emas cocok digunakan sebagai dana darurat?",
+      "gold_slug": "emas-untuk-dana-darurat",
+      "top1": "emas-untuk-dana-darurat",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 10.211
+    },
+    {
+      "id": "q24",
+      "question": "Apa keunggulan emas sebagai instrumen dana darurat?",
+      "gold_slug": "emas-untuk-dana-darurat",
+      "top1": "emas-untuk-dana-darurat",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 8.288
+    },
+    {
+      "id": "q25",
+      "question": "Bagaimana cara menyimpan emas agar tetap aman?",
+      "gold_slug": "keamanan-menyimpan-emas",
+      "top1": "keamanan-menyimpan-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 7.255
+    },
+    {
+      "id": "q26",
+      "question": "Kenapa keamanan menyimpan emas itu penting?",
+      "gold_slug": "keamanan-menyimpan-emas",
+      "top1": "keamanan-menyimpan-emas",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 8.41
+    },
+    {
+      "id": "q27",
+      "question": "Kenapa harga emas Antam tidak naik saat harga spot emas dunia naik?",
+      "gold_slug": "spot-price-emas-vs-harga-antam",
+      "top1": "spot-price-emas-vs-harga-antam",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 15.352
+    },
+    {
+      "id": "q28",
+      "question": "Apa perbedaan spot price emas dunia dengan harga emas Antam?",
+      "gold_slug": "spot-price-emas-vs-harga-antam",
+      "top1": "spot-price-emas-vs-harga-antam",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 15.435
+    },
+    {
+      "id": "q29",
+      "question": "Apa perbedaan utama emas digital dan emas fisik?",
+      "gold_slug": "emas-digital-vs-emas-fisik",
+      "top1": "emas-digital-vs-emas-fisik",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 6.202
+    },
+    {
+      "id": "q30",
+      "question": "Apa saja hal yang perlu dipertimbangkan sebelum memilih emas digital atau fisik?",
+      "gold_slug": "emas-digital-vs-emas-fisik",
+      "top1": "emas-digital-vs-emas-fisik",
+      "top1_hit": true,
+      "top3_hits": true,
+      "answered": true,
+      "score": 10.721
+    }
+  ],
+  "out_of_scope": [
+    {
+      "id": "o01",
+      "question": "Bagaimana cara membuat paspor di kantor imigrasi?",
+      "rejected": true,
+      "score": 3.39,
+      "accepted_source": null
+    },
+    {
+      "id": "o02",
+      "question": "Apa resep rendang daging sapi yang enak?",
+      "rejected": true,
+      "score": 0.0,
+      "accepted_source": null
+    },
+    {
+      "id": "o03",
+      "question": "Bagaimana cara mengganti oli sepeda motor?",
+      "rejected": true,
+      "score": 1.418,
+      "accepted_source": null
+    },
+    {
+      "id": "o04",
+      "question": "Siapa penemu bola lampu pijar?",
+      "rejected": true,
+      "score": 0.0,
+      "accepted_source": null
+    },
+    {
+      "id": "o05",
+      "question": "Bagaimana cara belajar bermain gitar?",
+      "rejected": true,
+      "score": 2.999,
+      "accepted_source": null
+    },
+    {
+      "id": "o06",
+      "question": "Apa saja gejala penyakit demam berdarah?",
+      "rejected": true,
+      "score": 0.0,
+      "accepted_source": null
+    },
+    {
+      "id": "o07",
+      "question": "Bagaimana cara merawat tanaman monstera?",
+      "rejected": true,
+      "score": 1.418,
+      "accepted_source": null
+    },
+    {
+      "id": "o08",
+      "question": "Apa perbedaan RAM dan ROM pada ponsel?",
+      "rejected": true,
+      "score": 2.55,
+      "accepted_source": null
+    },
+    {
+      "id": "o09",
+      "question": "Bagaimana cara mendaftar ujian SIM?",
+      "rejected": true,
+      "score": 1.418,
+      "accepted_source": null
+    },
+    {
+      "id": "o10",
+      "question": "Apa peraturan lalu lintas untuk pengendara sepeda?",
+      "rejected": true,
+      "score": 4.211,
+      "accepted_source": null
+    }
+  ]
+}

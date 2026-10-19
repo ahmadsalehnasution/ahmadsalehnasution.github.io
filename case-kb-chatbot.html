@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knowledge base chatbot with citations and a refusal path | Ahmad Saleh</title>
+  <meta name="description" content="Case study: a retrieval-augmented question-answering system over my own Indonesian articles that answers only from the documents, cites the source of every answer, and says it does not know rather than fabricate.">
+  <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .cs-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.95rem}
+    .cs-table th,.cs-table td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top}
+    .cs-table th{background:var(--accent-soft);font-weight:600}
+    .cs-flow{font-family:var(--font-mono);font-size:.83rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem;overflow-x:auto;white-space:pre;margin:1.25rem 0}
+    .badge{display:inline-block;padding:.15rem .55rem;border-radius:999px;background:var(--tag-bg);color:var(--tag-ink);font-size:.78rem;font-weight:600}
+    .cs-meta{color:var(--muted);font-size:.9rem;margin-top:.35rem}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main" class="page">
+    <a class="back-link" href="index.html#projects"><span aria-hidden="true">←</span> Ahmad Saleh</a>
+
+    <header class="page__head">
+      <p class="intro__eyebrow">Case study · 2026 · <span class="badge">Prototype</span></p>
+      <h1 class="page__title">Knowledge base chatbot with citations and a refusal path</h1>
+      <p class="page__lead">A retrieval-augmented question-answering system over my own Indonesian articles. It answers only from the documents, cites the source of every answer, and says "I don't know" when nothing is relevant — instead of guessing. Every returned answer is a verbatim passage with a clickable source, so nothing can be fabricated.</p>
+      <p class="cs-meta">Built by me · Python standard library, no vector database, no paid model API · runs locally, no server</p>
+    </header>
+
+    <section aria-labelledby="problem">
+      <h2 class="subhead" id="problem">The problem</h2>
+      <p>Product and policy answers are inconsistent when the knowledge lives scattered across documents, and the expensive failure is a confident answer that is wrong. A system that answers <strong>only</strong> from official documents, cites its source, and is willing to say "there is nothing in my documents about that" is safer than one that guesses — so I built the retrieval and the refusal path, and then measured both.</p>
+    </section>
+
+    <section aria-labelledby="role">
+      <h2 class="subhead" id="role">What the system does, and what stays with me</h2>
+      <table class="cs-table">
+        <thead><tr><th>The system</th><th>I</th></tr></thead>
+        <tbody>
+          <tr><td>Fetches articles, splits them into passages, indexes them with BM25</td><td>Choose which documents are authoritative and in scope</td></tr>
+          <tr><td>Returns the most relevant passage verbatim, with title + URL</td><td>Write the test set and the gold source for each question</td></tr>
+          <tr><td>Refuses when the top score is below the threshold</td><td>Set the threshold and judge correctness</td></tr>
+          <tr><td>Never generates text — it can only quote a document</td><td>Decide what may be shown to a customer</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="flow">
+      <h2 class="subhead" id="flow">How it runs</h2>
+      <pre class="cs-flow">corpus articles (suksesdenganemas.com, fetched read-only via REST API)
+        ↓
+split each article into ~160-word passages  →  tokenize (lowercase, drop Indonesian stopwords)
+        ↓
+index passages with BM25 (Okapi BM25, k1=1.5, b=0.75 — implemented from scratch)
+        ↓
+user question  →  tokenize  →  score every passage
+        ↓
+top score ≥ 4.5  ──►  return top passage VERBATIM + citations (title, URL, score)
+top score <  4.5  ──►  "Saya tidak menemukan jawabannya di dokumen yang saya miliki."
+        ↓
+unanswered questions become a gap list for the knowledge base itself</pre>
+    </section>
+
+    <section aria-labelledby="example">
+      <h2 class="subhead" id="example">Two real runs</h2>
+      <p><strong>In scope</strong> — "Apa itu spread harga emas dan bagaimana cara menghitungnya?" returned the spread article's own FAQ as the answer ("Apa arti spread harga emas? Selisih antara harga saat membeli dan harga saat menjual kembali emas…") and cited <em>Spread Harga Beli dan Jual Emas: Panduan Lengkap</em> with its URL.</p>
+      <p><strong>Out of scope</strong> — "Bagaimana cara membuat paspor di kantor imigrasi?" returned <em>"Saya tidak menemukan jawabannya di dokumen yang saya miliki."</em> (top score 3.39, below the 4.5 threshold). The system knows it is a gold-investment knowledge base, so it refuses rather than improvise an answer about passports.</p>
+    </section>
+
+    <section aria-labelledby="results">
+      <h2 class="subhead" id="results">Test results — measured, 40 questions</h2>
+      <table class="cs-table">
+        <thead><tr><th>Metric</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Corpus</td><td>12 of my own articles, 47 passages</td></tr>
+          <tr><td>Test set</td><td>30 in-scope + 10 out-of-scope questions</td></tr>
+          <tr><td>Correct source ranked first (top-1)</td><td>28 / 30 — <strong>93.3%</strong></td></tr>
+          <tr><td>Correct source in the citations (top-3)</td><td>29 / 30 — <strong>96.7%</strong></td></tr>
+          <tr><td>In-scope questions answered (not falsely refused)</td><td>30 / 30 — 100%</td></tr>
+          <tr><td>Out-of-scope questions correctly refused</td><td>10 / 10 — <strong>100%</strong></td></tr>
+          <tr><td>Out-of-scope questions wrongly answered</td><td><strong>0</strong></td></tr>
+          <tr><td>In-scope top-score range</td><td>min 5.25 · median 9.39 · max 19.58</td></tr>
+          <tr><td>Out-of-scope top-score range</td><td>min 0.00 · median 1.42 · max 4.21</td></tr>
+        </tbody>
+      </table>
+      <p>The 4.5 threshold sits inside a real gap, not a hand-tuned number: out-of-scope questions share at most one or two generic words with the corpus (top score 4.21), while every in-scope question shares many content words (top score 5.25 and up). The two top-1 misses are near-duplicate pairs of my own articles that make the same point in different words, and both were recovered by the top-3 citations.</p>
+      <p>The benefit claimed here is deliberately about <strong>not fabricating</strong>, not speed: manual answer-finding time was never measured, so no time-saving number appears anywhere.</p>
+    </section>
+
+    <section aria-labelledby="limits">
+      <h2 class="subhead" id="limits">Limitations</h2>
+      <ul class="plain-list">
+        <li><strong>Extractive only.</strong> It quotes the passage verbatim; it does not write a natural-language answer, so a paraphrased question surfaces the right passage in raw form.</li>
+        <li><strong>Lexical retrieval.</strong> BM25 matches words, not meaning — a synonym ("buyback" vs "jual kembali") can miss until both terms appear in the corpus.</li>
+        <li><strong>Small, single-topic corpus.</strong> 12 articles on gold, one language (Indonesian). Results do not generalise to other domains.</li>
+        <li><strong>Corpus-specific threshold.</strong> 4.5 was calibrated on this corpus's score gap; a different document set needs its own calibration.</li>
+        <li><strong>No multi-turn memory, no access control, no rate limiting</strong> — it is a single-user local demo.</li>
+        <li><strong>One evaluator (me).</strong> The gold source per question was assigned by one person with no inter-rater check.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="artefacts">
+      <h2 class="subhead" id="artefacts">Artefacts</h2>
+      <ul class="plain-list">
+        <li><a href="projects/kb-chatbot-id/README.md">Full write-up (README)</a> — problem, role split, flow, and how to run it</li>
+        <li><a href="projects/kb-chatbot-id/results/eval_results.json">Per-question evaluation results</a> — every question, its score and the source retrieved</li>
+        <li><a href="projects/kb-chatbot-id/tests/testset.json">The 40-question test set</a> with the gold source per question</li>
+        <li><a href="projects/kb-chatbot-id/scripts/kb_engine.py">The engine</a> — BM25 and the refusal path in ~120 lines of standard-library Python</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Ahmad Saleh</p>
+    </footer>
+  </main>
+</body>
+</html>
