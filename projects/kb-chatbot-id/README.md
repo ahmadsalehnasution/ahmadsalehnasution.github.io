@@ -78,9 +78,24 @@ top score <  4.5  ──►  "Saya tidak menemukan jawabannya di dokumen yang sa
 | In-scope top-score range | min 5.25 · median 9.39 · max 19.58 |
 | Out-of-scope top-score range | min 0.00 · median 1.42 · max 4.21 |
 
+### Threshold sensitivity (what the 4.5 choice buys and costs)
+
+| Threshold | Top-1 | In-scope answered | Out-of-scope refused |
+|---|---|---|---|
+| 4.0 | 93.3% | 30 / 30 | 9 / 10 — one slips through |
+| **4.5 (used)** | **93.3%** | **30 / 30** | **10 / 10** |
+| 5.0 | 93.3% | 30 / 30 | 10 / 10 |
+| 5.5 | 90.0% | 29 / 30 — one refused wrongly | 10 / 10 |
+
 The threshold (4.5) sits inside the natural gap between the two groups — out-of-scope questions share at most one
 or two generic words with the corpus (top score 4.21), while every in-scope question shares many content words
-(top score 5.25 and up). The gap, not a hand-tuned score, is what makes the refusal reliable.
+(top score 5.25 and up). The sweep matters as much as the single number: 4.5 and 5.0 behave identically, so the
+cut is not knife-edge, and the table shows exactly what breaks on either side.
+
+**Read the refusal figure with its caveat.** The threshold was chosen from the score gap of *this same test set*,
+so 10/10 is an **in-sample** result: it demonstrates that the two classes are separable and where the cut lands,
+not that unseen questions would be refused at the same rate. A held-out question set is the next honest step and
+has not been written yet.
 
 The two top-1 misses are honest, not bugs: the corpus contains near-duplicate pairs of articles that make the same
 point in different words ("emas is a long-term asset, not a quick-profit trade" appears in both the spread article
@@ -94,16 +109,17 @@ the purity article). Both misses were recovered by the top-3 citations.
 - **Lexical retrieval.** BM25 matches words, not meaning. A synonym or paraphrase ("buyback" vs "jual kembali")
   can miss until both terms appear in the corpus.
 - **Small, single-topic corpus.** 12 articles on gold, one language (Indonesian). Results do not generalise.
-- **Threshold is corpus-specific.** 4.5 was calibrated on this corpus's score gap; a different document set needs
-  its own calibration.
+- **Threshold is corpus-specific and in-sample.** 4.5 was calibrated on this corpus's score gap — and on the same
+  test set used to report the results. A different document set needs its own calibration, and a held-out question
+  set is needed before the refusal rate can be read as a generalisation.
 - **No multi-turn memory, no access control, no rate limiting** — it is a single-user local demo.
 - **One evaluator (me).** The gold source for each question was assigned by one person, with no inter-rater check.
 
 ## Benefit that can be demonstrated
 
 Not time saved (never measured). The demonstrable benefit is **no fabricated answers**: 10 of 10 out-of-scope
-questions were refused instead of answered, and every returned answer is a verbatim passage with a clickable source,
-so a reader can check it. Unanswered questions double as a gap list for the knowledge base itself.
+questions were refused instead of answered (in-sample — see the caveat above), and every returned answer is a
+verbatim passage with a clickable source, so a reader can check it. Unanswered questions double as a gap list for the knowledge base itself.
 
 ## How to run
 
@@ -111,8 +127,11 @@ so a reader can check it. Unanswered questions double as a gap list for the know
 # one question
 python3 scripts/query.py "Apa itu spread harga emas?"
 
-# the full test set and metrics
-python3 scripts/run_eval.py 4.5
+# the full test set and metrics (threshold defaults to the engine's 4.5)
+python3 scripts/run_eval.py
+
+# any other threshold, to see the trade-off for yourself
+python3 scripts/run_eval.py 5.0
 
 # rebuild the corpus from the live site (read-only)
 python3 scripts/fetch_corpus.py

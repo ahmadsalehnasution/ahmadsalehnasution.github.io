@@ -9,9 +9,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import kb_engine as kb
 
 ROOT = Path(__file__).resolve().parent.parent
-THRESHOLD = kb  # placeholder; we read below
 
-def main(threshold: float = 0.5, k: int = 3) -> None:
+def main(threshold: float = kb.DEFAULT_THRESHOLD, k: int = 3) -> None:
     idx = kb.build_index(ROOT / "corpus")
     ts = json.loads((ROOT / "tests" / "testset.json").read_text(encoding="utf-8"))
 
@@ -80,14 +79,47 @@ def main(threshold: float = 0.5, k: int = 3) -> None:
         "out_of_scope_scores": {"min": round(min(out_scores), 3), "median": round(statistics.median(out_scores), 3), "max": round(max(out_scores), 3)},
     }
 
+    # --- threshold sensitivity: one number is not evidence, a curve is -------------
+    sensitivity = []
+    for t in (4.0, 4.5, 5.0, 5.5):
+        t1 = ans = 0
+        for q in in_scope:
+            r = kb.answer(q["question"], idx, k=k, threshold=t)
+            slugs = [c["link"].rstrip("/").split("/")[-1] for c in r["citations"]]
+            t1 += bool(slugs) and slugs[0] == q["gold_slug"]
+            ans += r["answered"]
+        rej = sum(1 for q in out_of_scope
+                  if not kb.answer(q["question"], idx, k=k, threshold=t)["answered"])
+        sensitivity.append({
+            "threshold": t,
+            "top1_hit_rate": round(t1 / len(in_scope), 4),
+            "answered_rate_in_scope": round(ans / len(in_scope), 4),
+            "out_of_scope_rejection_rate": round(rej / len(out_of_scope), 4),
+        })
+
+    notes = (
+        "The threshold sits in the score gap observed in THIS test set (out-of-scope maximum 4.211 against "
+        "in-scope minimum 5.254), so the rejection figures are in-sample: they show the two classes are "
+        "separable and where the cut lands, not that unseen questions will be rejected at the same rate. "
+        "A held-out question set is the next honest step and is not done yet. The sensitivity table shows what "
+        "the trade-off costs as the threshold moves."
+    )
+
     (ROOT / "results").mkdir(exist_ok=True)
     (ROOT / "results" / "eval_results.json").write_text(
-        json.dumps({"summary": summary, "in_scope": in_rows, "out_of_scope": out_rows},
+        json.dumps({"summary": summary, "threshold_sensitivity": sensitivity, "notes": notes,
+                    "in_scope": in_rows, "out_of_scope": out_rows},
                    ensure_ascii=False, indent=2), encoding="utf-8")
 
     print("\n=== SUMMARY ===")
     for kk, vv in summary.items():
         print(f"{kk}: {vv}")
+    print("\n=== THRESHOLD SENSITIVITY (in-sample) ===")
+    print(f"  {'threshold':>9}  {'top1':>7}  {'answered (in)':>13}  {'rejected (out)':>14}")
+    for s in sensitivity:
+        print(f"  {s['threshold']:>9}  {s['top1_hit_rate']:>7}  "
+              f"{s['answered_rate_in_scope']:>13}  {s['out_of_scope_rejection_rate']:>14}")
+    print("\nNOTE:", notes)
     print("\nFalse-rejected in-scope questions (answered=False):")
     for r in in_rows:
         if not r["answered"]:
@@ -98,4 +130,4 @@ def main(threshold: float = 0.5, k: int = 3) -> None:
             print(f"  {r['id']}: {r['question']} -> {r['accepted_source']}")
 
 if __name__ == "__main__":
-    main(threshold=float(sys.argv[1]) if len(sys.argv) > 1 else 0.5)
+    main(threshold=float(sys.argv[1]) if len(sys.argv) > 1 else kb.DEFAULT_THRESHOLD)

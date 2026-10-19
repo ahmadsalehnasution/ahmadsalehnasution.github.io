@@ -90,7 +90,20 @@ unanswered questions become a gap list for the knowledge base itself</pre>
           <tr><td>Out-of-scope top-score range</td><td>min 0.00 · median 1.42 · max 4.21</td></tr>
         </tbody>
       </table>
+      <table class="cs-table">
+        <caption style="text-align:left;padding:.4rem 0;color:#555">Threshold sensitivity — what the 4.5 choice costs and buys (same test set)</caption>
+        <thead>
+          <tr><th>Threshold</th><th>Correct source first</th><th>In-scope answered</th><th>Out-of-scope refused</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>4.0</td><td>93.3%</td><td>30 / 30</td><td>9 / 10 — one slips through</td></tr>
+          <tr><td><strong>4.5 (used)</strong></td><td><strong>93.3%</strong></td><td><strong>30 / 30</strong></td><td><strong>10 / 10</strong></td></tr>
+          <tr><td>5.0</td><td>93.3%</td><td>30 / 30</td><td>10 / 10</td></tr>
+          <tr><td>5.5</td><td>90.0%</td><td>29 / 30 — one refused wrongly</td><td>10 / 10</td></tr>
+        </tbody>
+      </table>
       <p>The 4.5 threshold sits inside a real gap, not a hand-tuned number: out-of-scope questions share at most one or two generic words with the corpus (top score 4.21), while every in-scope question shares many content words (top score 5.25 and up). The two top-1 misses are near-duplicate pairs of my own articles that make the same point in different words, and both were recovered by the top-3 citations.</p>
+      <p><strong>Where this number is honest and where it is not.</strong> The threshold was chosen from the score gap of <em>this same test set</em>, so the refusal figures are in-sample: they prove the two classes are separable and show where the cut lands — not that unseen questions will be refused at the same rate. Two things keep this from being a single lucky number: 4.5 and 5.0 give identical results (so the cut is not knife-edge), and the sweep above shows exactly what breaks on either side. A held-out question set is the next step and is not done yet.</p>
       <p>The benefit claimed here is deliberately about <strong>not fabricating</strong>, not speed: manual answer-finding time was never measured, so no time-saving number appears anywhere.</p>
     </section>
 
@@ -100,7 +113,7 @@ unanswered questions become a gap list for the knowledge base itself</pre>
         <li><strong>Extractive only.</strong> It quotes the passage verbatim; it does not write a natural-language answer, so a paraphrased question surfaces the right passage in raw form.</li>
         <li><strong>Lexical retrieval.</strong> BM25 matches words, not meaning — a synonym ("buyback" vs "jual kembali") can miss until both terms appear in the corpus.</li>
         <li><strong>Small, single-topic corpus.</strong> 12 articles on gold, one language (Indonesian). Results do not generalise to other domains.</li>
-        <li><strong>Corpus-specific threshold.</strong> 4.5 was calibrated on this corpus's score gap; a different document set needs its own calibration.</li>
+        <li><strong>Corpus-specific threshold.</strong> 4.5 was calibrated on this corpus's score gap — and on the same test set used to report the results, which makes those figures in-sample. A held-out question set, not yet written, is the honest next step.</li>
         <li><strong>No multi-turn memory, no access control, no rate limiting</strong> — it is a single-user local demo.</li>
         <li><strong>One evaluator (me).</strong> The gold source per question was assigned by one person with no inter-rater check.</li>
       </ul>
