@@ -32,6 +32,7 @@
       <h1 class="page__title">Knowledge base chatbot with citations and a refusal path</h1>
       <p class="page__lead">A retrieval-augmented question-answering system over my own Indonesian articles. It answers only from the documents, cites the source of every answer, and says "I don't know" when nothing is relevant — instead of guessing. Every returned answer is a verbatim passage with a clickable source, so nothing can be fabricated.</p>
       <p class="cs-meta">Built by me · Python standard library, no vector database, no paid model API · runs locally, no server</p>
+      <p class="cs-meta">Measured twice: 93.3% top-1 and 10 of 10 refusals in-sample, then 80.0% top-1 and 2 of 5 refusals held-out. Both numbers are below, with the failures named.</p>
     </header>
 
     <section aria-labelledby="problem">
@@ -75,9 +76,12 @@ unanswered questions become a gap list for the knowledge base itself</pre>
     </section>
 
     <section aria-labelledby="results">
-      <h2 class="subhead" id="results">Test results — measured, 40 questions</h2>
+      <h2 class="subhead" id="results">Test results — in-sample and held-out, side by side</h2>
+      <p>Two numbers are published here because only one of them says anything about questions the threshold was never written against. <strong>In-sample</strong> is the 40-question set that the 4.5 threshold was chosen from. <strong>Held-out</strong> is a separate 15-question set written on 23 October 2026 — after the threshold was frozen — committed to the repository <em>before</em> it was scored, and run exactly once.</p>
+
+      <h3 class="subhead">In-sample — 40 questions, the set the threshold was chosen from</h3>
       <table class="cs-table">
-        <thead><tr><th>Metric</th><th>Result</th></tr></thead>
+        <thead><tr><th>Metric</th><th>Result (in-sample)</th></tr></thead>
         <tbody>
           <tr><td>Corpus</td><td>12 of my own articles, 47 passages</td></tr>
           <tr><td>Test set</td><td>30 in-scope + 10 out-of-scope questions</td></tr>
@@ -91,7 +95,7 @@ unanswered questions become a gap list for the knowledge base itself</pre>
         </tbody>
       </table>
       <table class="cs-table">
-        <caption style="text-align:left;padding:.4rem 0;color:#555">Threshold sensitivity — what the 4.5 choice costs and buys (same test set)</caption>
+        <caption style="text-align:left;padding:.4rem 0;color:#555">Threshold sensitivity — what the 4.5 choice costs and buys (same 40-question set, therefore in-sample)</caption>
         <thead>
           <tr><th>Threshold</th><th>Correct source first</th><th>In-scope answered</th><th>Out-of-scope refused</th></tr>
         </thead>
@@ -102,18 +106,43 @@ unanswered questions become a gap list for the knowledge base itself</pre>
           <tr><td>5.5</td><td>90.0%</td><td>29 / 30 — one refused wrongly</td><td>10 / 10</td></tr>
         </tbody>
       </table>
-      <p>The 4.5 threshold sits inside a real gap, not a hand-tuned number: out-of-scope questions share at most one or two generic words with the corpus (top score 4.21), while every in-scope question shares many content words (top score 5.25 and up). The two top-1 misses are near-duplicate pairs of my own articles that make the same point in different words, and both were recovered by the top-3 citations.</p>
-      <p><strong>Where this number is honest and where it is not.</strong> The threshold was chosen from the score gap of <em>this same test set</em>, so the refusal figures are in-sample: they prove the two classes are separable and show where the cut lands — not that unseen questions will be refused at the same rate. Two things keep this from being a single lucky number: 4.5 and 5.0 give identical results (so the cut is not knife-edge), and the sweep above shows exactly what breaks on either side. A held-out question set is the next step and is not done yet.</p>
-      <p>The benefit claimed here is deliberately about <strong>not fabricating</strong>, not speed: manual answer-finding time was never measured, so no time-saving number appears anywhere.</p>
-    </section>
+      <p>Inside this particular set the 4.5 threshold does sit in a gap: out-of-scope questions share at most one or two generic words with the corpus (top score 4.21), while every in-scope question shares many content words (top score 5.25 and up). The two top-1 misses are near-duplicate pairs of my own articles that make the same point in different words, and both were recovered by the top-3 citations. Read those figures as a description of the set the threshold was fitted to, not as a property of the system — the held-out run below is what tests that.</p>
 
+      <h3 class="subhead">Held-out — 15 questions written after the threshold was frozen</h3>
+      <p>The set was written to the protocol in <code>tests/HELDOUT-PROTOCOL.md</code>: 10 in-scope questions covering 10 different articles, one question per article and none of them a reworded copy of the original 30, plus 5 out-of-scope questions in two labelled kinds — 3 plainly <em>unrelated</em> and 2 <em>gold-adjacent</em> (about gold or personal finance but not answerable from these 12 articles). Commit <code>543b440</code> records the set before the score file existed, so the order of events is checkable in the repository history. The threshold was not moved in either direction.</p>
+      <table class="cs-table">
+        <thead><tr><th>Metric</th><th>Held-out</th><th>In-sample, for comparison</th></tr></thead>
+        <tbody>
+          <tr><td>Correct source ranked first (top-1)</td><td>8 / 10 — <strong>80.0%</strong></td><td>93.3%</td></tr>
+          <tr><td>Correct source in the citations (top-3)</td><td>10 / 10 — <strong>100%</strong></td><td>96.7%</td></tr>
+          <tr><td>In-scope questions answered (not falsely refused)</td><td>10 / 10 — 100%</td><td>30 / 30</td></tr>
+          <tr><td>Out-of-scope questions correctly refused</td><td>2 / 5 — <strong>40.0%</strong></td><td>10 / 10 — 100%</td></tr>
+          <tr><td>— of which <em>unrelated</em></td><td>2 / 3</td><td>not separated</td></tr>
+          <tr><td>— of which <em>gold-adjacent</em></td><td><strong>0 / 2</strong></td><td>not separated</td></tr>
+          <tr><td>In-scope top-score range</td><td>min 8.17 · median 16.11 · max 40.89</td><td>min 5.25 · max 19.58</td></tr>
+          <tr><td>Out-of-scope top-score range</td><td>min 3.23 · median 4.54 · max 6.41</td><td>min 0.00 · max 4.21</td></tr>
+          <tr><td>Threshold used</td><td>4.5 — unchanged, not tuned</td><td>4.5, chosen from this set</td></tr>
+        </tbody>
+      </table>
+      <p><strong>The held-out refusal figure is much worse, and it is the one that counts: 10 out of 10 on the set the threshold was fitted to became 2 out of 5 on questions it had never seen.</strong> Retrieval held up (top-3 100%, every in-scope question still answered), but the refusal path did not generalise: the two score classes overlap across the two sets, because the highest out-of-scope score here (6.41) is above the lowest in-sample in-scope score (5.25). A single top-score cut, fitted to one 40-question gap, was never going to separate them in general.</p>
+      <p>The three questions it answered when it should have refused:</p>
+      <ul class="plain-list">
+        <li><strong>Gold-adjacent, 6.405</strong> — <em>Mana yang lebih baik untuk dana pensiun, emas atau reksa dana saham?</em> was answered from <em>Dollar Cost Averaging Emas: Cara Investasi Cerdas</em>. The corpus says nothing at all about mutual funds; the match rides on <em>dana</em> and <em>baik</em>. This is the highest score any out-of-scope question has reached in this project.</li>
+        <li><strong>Gold-adjacent, 4.544</strong> — <em>Berapa harga emas Antam hari ini di Jakarta?</em> was answered from the spot-price article, which quotes one dated snapshot (Rp2.64 million per gram on 6 September 2026). Passing a stale number off as the current price is the single most damaging failure this system can have.</li>
+        <li><strong>Unrelated, 5.218</strong> — <em>Bagaimana cara memilih jurusan kuliah yang sesuai minat?</em> was answered from <em>Emas Digital vs Emas Fisik</em>. It shares only generic words (<em>memilih</em>, <em>sesuai</em>) with the corpus, but BM25 rewards a rare word wherever it lands.</li>
+      </ul>
+      <p>The failure pattern is exactly what the protocol predicted: a question about a completely foreign topic is usually caught (2 of 3 unrelated refused), while a question that speaks the corpus vocabulary but asks for a fact the articles never state is answered with confidence (0 of 2 gold-adjacent refused). That asymmetry is the dangerous one — a reader can tell at a glance that a passport answer is missing, but has to fact-check a price.</p>
+      <p>Two in-scope questions also lost top-1, both to a neighbouring article that argues the same thing in different words: <em>Kesalahan apa yang biasanya bikin pemula gagal menabung emas?</em> retrieved the DCA article instead of the savings article, and <em>Lebih baik beli emas sekaligus dengan dana besar, atau dicicil rutin setiap bulan?</em> retrieved the emergency-fund article instead of the DCA one. Both correct sources were still inside the top-3 citations.</p>
+      <p><strong>What was deliberately not done after seeing this result:</strong> the threshold was not lowered to rescue the in-scope figures, not raised to rescue the refusals, and the question set was not edited after scoring — any of those would turn the held-out run back into an in-sample one and destroy its only value. The fix belongs in the retriever (for example, requiring the question to overlap the matched passage on a content word that is not a generic connector, or refusing when the top passage answers a different question than the one asked), and it has to be judged on a <em>new</em> held-out set, because this one is now spent.</p>
+      <p>The benefit claimed on this page remains about <strong>not fabricating</strong>, not speed: manual answer-finding time was never measured, so no time-saving number appears anywhere.</p>
+    </section>
     <section aria-labelledby="limits">
       <h2 class="subhead" id="limits">Limitations</h2>
       <ul class="plain-list">
         <li><strong>Extractive only.</strong> It quotes the passage verbatim; it does not write a natural-language answer, so a paraphrased question surfaces the right passage in raw form.</li>
         <li><strong>Lexical retrieval.</strong> BM25 matches words, not meaning — a synonym ("buyback" vs "jual kembali") can miss until both terms appear in the corpus.</li>
         <li><strong>Small, single-topic corpus.</strong> 12 articles on gold, one language (Indonesian). Results do not generalise to other domains.</li>
-        <li><strong>Corpus-specific threshold.</strong> 4.5 was calibrated on this corpus's score gap — and on the same test set used to report the results, which makes those figures in-sample. A held-out question set, not yet written, is the honest next step.</li>
+        <li><strong>Corpus-specific threshold.</strong> 4.5 was calibrated on this corpus's score gap — and on the same test set used to report the results, which makes those figures in-sample. The held-out set now exists and it shows the cut does not generalise (2 of 5 refusals); 4.5 stays a value fitted to one set, not a validated one.</li>
         <li><strong>No multi-turn memory, no access control, no rate limiting</strong> — it is a single-user local demo.</li>
         <li><strong>One evaluator (me).</strong> The gold source per question was assigned by one person with no inter-rater check.</li>
       </ul>
@@ -125,6 +154,9 @@ unanswered questions become a gap list for the knowledge base itself</pre>
         <li><a href="projects/kb-chatbot-id/README.md">Full write-up (README)</a> — problem, role split, flow, and how to run it</li>
         <li><a href="projects/kb-chatbot-id/results/eval_results.json">Per-question evaluation results</a> — every question, its score and the source retrieved</li>
         <li><a href="projects/kb-chatbot-id/tests/testset.json">The 40-question test set</a> with the gold source per question</li>
+        <li><a href="projects/kb-chatbot-id/tests/heldout.json">The held-out 15-question set</a> — committed before it was scored</li>
+        <li><a href="projects/kb-chatbot-id/results/heldout_results.json">Held-out results</a> — every question, its top score, and the source it wrongly cited</li>
+        <li><a href="projects/kb-chatbot-id/tests/HELDOUT-PROTOCOL.md">The held-out protocol</a> — the rules that were written before the set</li>
         <li><a href="projects/kb-chatbot-id/scripts/kb_engine.py">The engine</a> — BM25 and the refusal path in ~120 lines of standard-library Python</li>
       </ul>
     </section>

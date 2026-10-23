@@ -1,0 +1,162 @@
+{
+  "summary": {
+    "set_commit": "543b440 2026-10-23",
+    "threshold_used": 4.5,
+    "threshold_tuned_on_this_set": false,
+    "corpus_articles": 12,
+    "in_scope_questions": 10,
+    "out_of_scope_questions": 5,
+    "top1_hit_rate": 0.8,
+    "top3_hit_rate": 1.0,
+    "answered_rate_in_scope": 1.0,
+    "out_of_scope_refusal_rate": 0.4,
+    "out_of_scope_refusal_by_kind": {
+      "gold-adjacent": "0/2",
+      "unrelated": "2/3"
+    }
+  },
+  "in_scope": [
+    {
+      "id": "h01",
+      "question": "Satu troy ounce emas itu setara berapa gram, dan kenapa harga dunia memakai satuan itu?",
+      "gold_slug": "cara-membaca-harga-emas",
+      "top1": "cara-membaca-harga-emas",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 13.947
+    },
+    {
+      "id": "h02",
+      "question": "Saya beli emas 10 gram seharga Rp15.000.000 dan harga buyback-nya Rp14.200.000. Berapa persen harga harus naik supaya saya impas?",
+      "gold_slug": "spread-harga-beli-dan-jual-emas",
+      "top1": "spread-harga-beli-dan-jual-emas",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 40.892
+    },
+    {
+      "id": "h03",
+      "question": "Apakah 10 gram emas kadar 75 persen nilainya sama dengan 10 gram emas kadar 99,9 persen?",
+      "gold_slug": "kadar-kemurnian-emas",
+      "top1": "kadar-kemurnian-emas",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 24.156
+    },
+    {
+      "id": "h04",
+      "question": "Saya mau beli emas Antam, bagaimana cara memverifikasi keaslian sertifikat CertiCard-nya?",
+      "gold_slug": "cara-membedakan-emas-asli-dan-palsu",
+      "top1": "cara-membedakan-emas-asli-dan-palsu",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 14.976
+    },
+    {
+      "id": "h05",
+      "question": "Saya punya 100 gram emas batangan yang sudah genap setahun. Berapa gram zakat yang harus saya keluarkan?",
+      "gold_slug": "zakat-emas-cara-hitung-nisab",
+      "top1": "zakat-emas-cara-hitung-nisab",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 16.402
+    },
+    {
+      "id": "h06",
+      "question": "Saya karyawan gaji bulanan dan baru bisa menyisihkan sedikit. Kesalahan apa yang biasanya bikin pemula gagal menabung emas?",
+      "gold_slug": "menabung-emas-modal-kecil",
+      "top1": "dollar-cost-averaging-emas-cara-investasi",
+      "top1_hit": false,
+      "top3_hit": true,
+      "answered": true,
+      "score": 8.167
+    },
+    {
+      "id": "h07",
+      "question": "Lebih baik beli emas sekaligus dengan dana besar, atau dicicil rutin setiap bulan?",
+      "gold_slug": "dollar-cost-averaging-emas-cara-investasi",
+      "top1": "emas-untuk-dana-darurat",
+      "top1_hit": false,
+      "top3_hit": true,
+      "answered": true,
+      "score": 11.223
+    },
+    {
+      "id": "h08",
+      "question": "Kalau saya butuh uang cepat untuk biaya rumah sakit, apa kekurangan menyimpan seluruh dana darurat dalam bentuk emas?",
+      "gold_slug": "emas-untuk-dana-darurat",
+      "top1": "emas-untuk-dana-darurat",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 19.75
+    },
+    {
+      "id": "h09",
+      "question": "Apakah aman menyimpan semua emas saya di satu brankas di rumah?",
+      "gold_slug": "keamanan-menyimpan-emas",
+      "top1": "keamanan-menyimpan-emas",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 15.813
+    },
+    {
+      "id": "h10",
+      "question": "Harga jual Antam di gerai tidak berubah padahal harga emas dunia naik. Apakah itu berarti nilai emas saya tidak bergerak?",
+      "gold_slug": "spot-price-emas-vs-harga-antam",
+      "top1": "spot-price-emas-vs-harga-antam",
+      "top1_hit": true,
+      "top3_hit": true,
+      "answered": true,
+      "score": 16.548
+    }
+  ],
+  "out_of_scope": [
+    {
+      "id": "hx01",
+      "question": "Bagaimana cara mengatasi baterai ponsel yang cepat habis?",
+      "kind": "unrelated",
+      "refused": true,
+      "score": 3.231,
+      "wrongly_cited": null
+    },
+    {
+      "id": "hx02",
+      "question": "Apa bahan utama untuk membuat kue lapis legit?",
+      "kind": "unrelated",
+      "refused": true,
+      "score": 3.644,
+      "wrongly_cited": null
+    },
+    {
+      "id": "hx03",
+      "question": "Bagaimana cara memilih jurusan kuliah yang sesuai minat?",
+      "kind": "unrelated",
+      "refused": false,
+      "score": 5.218,
+      "wrongly_cited": "Emas Digital vs Emas Fisik: 5 Perbedaan Penting dan Aman untuk Pemula"
+    },
+    {
+      "id": "hx04",
+      "question": "Berapa harga emas Antam hari ini di Jakarta?",
+      "kind": "gold-adjacent",
+      "refused": false,
+      "score": 4.544,
+      "wrongly_cited": "Spot Price Emas Dunia Tembus Rekor USD 4.429, Ini Alasan Harga Antam Belum Ikut Naik"
+    },
+    {
+      "id": "hx05",
+      "question": "Mana yang lebih baik untuk dana pensiun, emas atau reksa dana saham?",
+      "kind": "gold-adjacent",
+      "refused": false,
+      "score": 6.405,
+      "wrongly_cited": "Dollar Cost Averaging Emas: Cara Investasi Cerdas"
+    }
+  ]
+}

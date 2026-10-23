@@ -64,7 +64,7 @@ top score <  4.5  ──►  "Saya tidak menemukan jawabannya di dokumen yang sa
 
 > "Saya tidak menemukan jawabannya di dokumen yang saya miliki." (top score 3.39, below the 4.5 threshold)
 
-## Test results (measured, 40 questions)
+## Test results — in-sample (40 questions) and held-out (15 questions)
 
 | Metric | Result |
 |---|---|
@@ -95,12 +95,51 @@ cut is not knife-edge, and the table shows exactly what breaks on either side.
 **Read the refusal figure with its caveat.** The threshold was chosen from the score gap of *this same test set*,
 so 10/10 is an **in-sample** result: it demonstrates that the two classes are separable and where the cut lands,
 not that unseen questions would be refused at the same rate. A held-out question set is the next honest step and
-has not been written yet.
+has since been written and run once; the result is below, and it is worse.
 
 The two top-1 misses are honest, not bugs: the corpus contains near-duplicate pairs of articles that make the same
 point in different words ("emas is a long-term asset, not a quick-profit trade" appears in both the spread article
 and the price-reading article; "pure gold is soft, so jewellery is alloyed" appears in both the 24-karat article and
 the purity article). Both misses were recovered by the top-3 citations.
+
+### Held-out test — 15 questions, written after the threshold was frozen
+
+The protocol in `tests/HELDOUT-PROTOCOL.md` was followed exactly: 10 in-scope questions across 10 different
+articles (one per article, none a reworded copy of the original 30), plus 5 out-of-scope questions in two labelled
+kinds — 3 `unrelated` and 2 `gold-adjacent` (about gold or personal finance but unanswerable from these 12
+articles). The set was committed (`543b440`) before it was scored, and the threshold was not moved.
+
+| Metric | Held-out | In-sample |
+|---|---|---|
+| Top-1 retrieval hit | 8 / 10 = **80.0%** | 93.3% |
+| Top-3 retrieval hit | 10 / 10 = **100%** | 96.7% |
+| In-scope answered | 10 / 10 = 100% | 30 / 30 |
+| Out-of-scope refused | 2 / 5 = **40.0%** | 10 / 10 = 100% |
+| — `unrelated` | 2 / 3 | not separated |
+| — `gold-adjacent` | **0 / 2** | not separated |
+| In-scope top-score range | min 8.17 · median 16.11 · max 40.89 | min 5.25 · max 19.58 |
+| Out-of-scope top-score range | min 3.23 · median 4.54 · max 6.41 | min 0.00 · max 4.21 |
+
+**The refusal rate did not generalise: 10 of 10 in-sample became 2 of 5 held-out.** Retrieval held up; the
+abstention did not. The classes overlap across the two sets — the highest held-out out-of-scope score (6.41) is
+above the lowest in-sample in-scope score (5.25) — so a single top-score cut fitted to one gap cannot separate
+them in general.
+
+Answered when it should have refused (detail in `results/heldout_results.json`):
+
+| Question | Kind | Score | Source it wrongly cited |
+|---|---|---|---|
+| Mana yang lebih baik untuk dana pensiun, emas atau reksa dana saham? | gold-adjacent | 6.405 | Dollar Cost Averaging Emas — Cara Investasi Cerdas |
+| Berapa harga emas Antam hari ini di Jakarta? | gold-adjacent | 4.544 | Spot Price Emas Dunia vs Harga Antam |
+| Bagaimana cara memilih jurusan kuliah yang sesuai minat? | unrelated | 5.218 | Emas Digital vs Emas Fisik |
+
+The pattern the protocol predicted is the one that occurred: foreign-topic questions are mostly caught, while
+gold-adjacent questions that reuse the corpus vocabulary are answered with confidence. That is the dangerous
+failure — a stale price sounds like an answer.
+
+Nothing was retuned after the result: no threshold change in either direction, and no edit to the set, because
+either would turn the run back into an in-sample test. The fix belongs in the retriever and must be judged on a
+new held-out set.
 
 ## Limitations
 
@@ -111,14 +150,14 @@ the purity article). Both misses were recovered by the top-3 citations.
 - **Small, single-topic corpus.** 12 articles on gold, one language (Indonesian). Results do not generalise.
 - **Threshold is corpus-specific and in-sample.** 4.5 was calibrated on this corpus's score gap — and on the same
   test set used to report the results. A different document set needs its own calibration, and a held-out question
-  set is needed before the refusal rate can be read as a generalisation.
+  set now exists and it broke the refusal rate (2 of 5), so 4.5 is a fitted value, not a validated one.
 - **No multi-turn memory, no access control, no rate limiting** — it is a single-user local demo.
 - **One evaluator (me).** The gold source for each question was assigned by one person, with no inter-rater check.
 
 ## Benefit that can be demonstrated
 
 Not time saved (never measured). The demonstrable benefit is **no fabricated answers**: 10 of 10 out-of-scope
-questions were refused instead of answered (in-sample — see the caveat above), and every returned answer is a
+questions were refused instead of answered (10 of 10 in-sample, but only 2 of 5 held-out — see above), and every returned answer is a
 verbatim passage with a clickable source, so a reader can check it. Unanswered questions double as a gap list for the knowledge base itself.
 
 ## How to run
@@ -133,9 +172,15 @@ python3 scripts/run_eval.py
 # any other threshold, to see the trade-off for yourself
 python3 scripts/run_eval.py 5.0
 
+# the held-out set: validate labels and leakage, then score once (no threshold argument by design)
+python3 scripts/run_heldout.py --check
+python3 scripts/run_heldout.py
+
 # rebuild the corpus from the live site (read-only)
 python3 scripts/fetch_corpus.py
 ```
 
 Artefacts: `corpus/` (fetched articles + provenance), `tests/testset.json`, `results/eval_results.json`
-(per-question detail), `scripts/` (engine, CLI, eval, fetch).
+(per-question detail), `tests/heldout.json` (the held-out set, committed before scoring),
+`results/heldout_results.json` (held-out detail, including the sources wrongly cited),
+`tests/HELDOUT-PROTOCOL.md` (the rules), `scripts/` (engine, CLI, eval, held-out runner, fetch).
