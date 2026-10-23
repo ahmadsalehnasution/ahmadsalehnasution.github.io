@@ -1,0 +1,82 @@
+{
+  "notes": "Held-out set, written 2026-10-23 after the 4.5 threshold was frozen, and committed BEFORE it was scored. Angles deliberately differ from the original 40-question set: scenarios a reader would ask rather than definitions. 10 in-scope questions cover 10 of the 12 corpus articles (one question per article, never two); emas-24-karat and emas-digital-vs-emas-fisik are not a gold label for any question here because the original set already carried three and two questions on them respectively and their content overlaps kadar-kemurnian-emas and spread. Out-of-scope: 3 unrelated, 2 gold-adjacent (about gold or personal finance but not answerable from these articles).",
+  "in_scope": [
+    {
+      "id": "h01",
+      "question": "Satu troy ounce emas itu setara berapa gram, dan kenapa harga dunia memakai satuan itu?",
+      "gold_slug": "cara-membaca-harga-emas"
+    },
+    {
+      "id": "h02",
+      "question": "Saya beli emas 10 gram seharga Rp15.000.000 dan harga buyback-nya Rp14.200.000. Berapa persen harga harus naik supaya saya impas?",
+      "gold_slug": "spread-harga-beli-dan-jual-emas"
+    },
+    {
+      "id": "h03",
+      "question": "Apakah 10 gram emas kadar 75 persen nilainya sama dengan 10 gram emas kadar 99,9 persen?",
+      "gold_slug": "kadar-kemurnian-emas"
+    },
+    {
+      "id": "h04",
+      "question": "Saya mau beli emas Antam, bagaimana cara memverifikasi keaslian sertifikat CertiCard-nya?",
+      "gold_slug": "cara-membedakan-emas-asli-dan-palsu"
+    },
+    {
+      "id": "h05",
+      "question": "Saya punya 100 gram emas batangan yang sudah genap setahun. Berapa gram zakat yang harus saya keluarkan?",
+      "gold_slug": "zakat-emas-cara-hitung-nisab"
+    },
+    {
+      "id": "h06",
+      "question": "Saya karyawan gaji bulanan dan baru bisa menyisihkan sedikit. Kesalahan apa yang biasanya bikin pemula gagal menabung emas?",
+      "gold_slug": "menabung-emas-modal-kecil"
+    },
+    {
+      "id": "h07",
+      "question": "Lebih baik beli emas sekaligus dengan dana besar, atau dicicil rutin setiap bulan?",
+      "gold_slug": "dollar-cost-averaging-emas-cara-investasi"
+    },
+    {
+      "id": "h08",
+      "question": "Kalau saya butuh uang cepat untuk biaya rumah sakit, apa kekurangan menyimpan seluruh dana darurat dalam bentuk emas?",
+      "gold_slug": "emas-untuk-dana-darurat"
+    },
+    {
+      "id": "h09",
+      "question": "Apakah aman menyimpan semua emas saya di satu brankas di rumah?",
+      "gold_slug": "keamanan-menyimpan-emas"
+    },
+    {
+      "id": "h10",
+      "question": "Harga jual Antam di gerai tidak berubah padahal harga emas dunia naik. Apakah itu berarti nilai emas saya tidak bergerak?",
+      "gold_slug": "spot-price-emas-vs-harga-antam"
+    }
+  ],
+  "out_of_scope": [
+    {
+      "id": "hx01",
+      "question": "Bagaimana cara mengatasi baterai ponsel yang cepat habis?",
+      "kind": "unrelated"
+    },
+    {
+      "id": "hx02",
+      "question": "Apa bahan utama untuk membuat kue lapis legit?",
+      "kind": "unrelated"
+    },
+    {
+      "id": "hx03",
+      "question": "Bagaimana cara memilih jurusan kuliah yang sesuai minat?",
+      "kind": "unrelated"
+    },
+    {
+      "id": "hx04",
+      "question": "Berapa harga emas Antam hari ini di Jakarta?",
+      "kind": "gold-adjacent"
+    },
+    {
+      "id": "hx05",
+      "question": "Mana yang lebih baik untuk dana pensiun, emas atau reksa dana saham?",
+      "kind": "gold-adjacent"
+    }
+  ]
+}
