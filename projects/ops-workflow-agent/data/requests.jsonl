@@ -1,0 +1,40 @@
+{"action": "schedule_social_post", "id": "RQ-001", "payload": {"amount_myr": 0, "blast_radius": 40, "summary": "Schedule the Monday gold-saving carousel on IG and FB"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "schedule_social_post", "id": "RQ-002", "payload": {"amount_myr": 0, "blast_radius": 900, "summary": "Schedule the same post to LinkedIn and TikTok"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "publish_article", "id": "RQ-003", "payload": {"amount_myr": 0, "blast_radius": 120, "summary": "Publish the drafted article on zakat emas"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "publish_article", "id": "RQ-004", "payload": {"amount_myr": 0, "blast_radius": 250, "summary": "Publish the drafted article on spread beli/jual"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "reply_customer_email", "id": "RQ-005", "payload": {"amount_myr": 0, "blast_radius": 1, "summary": "Reply to a question about delivery time"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "reply_customer_email", "id": "RQ-006", "payload": {"amount_myr": 0, "blast_radius": 1, "summary": "Reply to a refund-status question"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "update_product_copy", "id": "RQ-007", "payload": {"amount_myr": 0, "blast_radius": 300, "summary": "Fix a typo in the 1-gram product copy"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "update_product_copy", "id": "RQ-008", "payload": {"amount_myr": 0, "blast_radius": 4200, "summary": "Rewrite the product copy across the catalogue"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "schedule_social_post", "id": "RQ-009", "payload": {"amount_myr": 0, "blast_radius": 30, "summary": "Schedule a story about gold price weekly recap"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "publish_article", "id": "RQ-010", "payload": {"amount_myr": 0, "blast_radius": 8000, "summary": "Publish a pillar article and push it to the newsletter list"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "update_price_page", "id": "RQ-011", "payload": {"amount_myr": 0, "blast_radius": 200, "summary": "Refresh the buy-back price table"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "update_price_page", "id": "RQ-012", "payload": {"amount_myr": 0, "blast_radius": 400, "summary": "Update the price page footnote on spread"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "issue_refund", "id": "RQ-013", "payload": {"amount_myr": 120, "blast_radius": 1, "summary": "Refund a duplicate 1-gram order"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "issue_refund", "id": "RQ-014", "payload": {"amount_myr": 380, "blast_radius": 1, "summary": "Refund a cancelled 5-gram order"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "issue_refund", "id": "RQ-015", "payload": {"amount_myr": 1750, "blast_radius": 1, "summary": "Refund a bulk order after courier damage"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "issue_refund", "id": "RQ-016", "payload": {"amount_myr": 4200, "blast_radius": 9000, "summary": "Refund a batch of orders after a pricing error"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "send_newsletter", "id": "RQ-017", "payload": {"amount_myr": 0, "blast_radius": 12000, "summary": "Send the monthly newsletter to the list"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "send_newsletter", "id": "RQ-018", "payload": {"amount_myr": 0, "blast_radius": 300, "summary": "Send a correction notice to last month's recipients"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "update_price_page", "id": "RQ-019", "payload": {"amount_myr": 2500, "blast_radius": 500, "summary": "Apply a supplier price increase to the public page"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "issue_refund", "id": "RQ-020", "payload": {"amount_myr": 90, "blast_radius": 1, "summary": "Refund a shipping fee"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "schedule_social_post", "id": "RQ-021", "payload": {"amount_myr": 0, "blast_radius": 60, "summary": "Schedule a customer testimonial post"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "publish_article", "id": "RQ-022", "payload": {"amount_myr": 0, "blast_radius": 210, "summary": "Publish the piece on gold vs inflation"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "reply_customer_email", "id": "RQ-023", "payload": {"amount_myr": 0, "blast_radius": 1, "summary": "Answer a question on zakat calculation"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "update_product_copy", "id": "RQ-024", "payload": {"amount_myr": 0, "blast_radius": 800, "summary": "Update the FAQ block on the product page"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "update_price_page", "id": "RQ-025", "payload": {"amount_myr": 0, "blast_radius": 90, "summary": "Correct a rounded figure on the price page"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "send_newsletter", "id": "RQ-026", "payload": {"amount_myr": 0, "blast_radius": 15000, "summary": "Send a promo campaign to the whole list"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "issue_refund", "id": "RQ-027", "payload": {"amount_myr": 640, "blast_radius": 1, "summary": "Partial refund for a delayed order"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "schedule_social_post", "id": "RQ-028", "payload": {"amount_myr": 0, "blast_radius": 900, "summary": "Schedule the week's three posts"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "update_product_copy", "id": "RQ-029", "payload": {"amount_myr": 0, "blast_radius": 150, "summary": "Add the new certificate number to the product copy"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "update_price_page", "id": "RQ-030", "payload": {"amount_myr": 0, "blast_radius": 7000, "summary": "Sync prices across all product pages"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "bulk_price_change", "id": "RQ-031", "payload": {"amount_myr": 0, "blast_radius": 9000, "summary": "Apply a 4% price change across the catalogue"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "bulk_price_change", "id": "RQ-032", "payload": {"amount_myr": 0, "blast_radius": 3500, "summary": "Apply a 1.5% price change to two products"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "bulk_price_change", "id": "RQ-033", "payload": {"amount_myr": 0, "blast_radius": 12000, "summary": "Re-price the whole catalogue after a supplier revision"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "refund_batch", "id": "RQ-034", "payload": {"amount_myr": 4800, "blast_radius": 120, "summary": "Batch refund 12 orders from the same incident"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "refund_batch", "id": "RQ-035", "payload": {"amount_myr": 9200, "blast_radius": 40, "summary": "Batch refund 6 high-value orders"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "change_payout_account", "id": "RQ-036", "payload": {"amount_myr": 0, "blast_radius": 1, "summary": "Change the payout bank account on the store"}, "requested_by": "op.d", "source": "synthetic"}
+{"action": "delete_records", "id": "RQ-037", "payload": {"amount_myr": 0, "blast_radius": 340, "summary": "Delete the old draft records from the database"}, "requested_by": "op.b", "source": "synthetic"}
+{"action": "rotate_api_key", "id": "RQ-038", "payload": {"amount_myr": 0, "blast_radius": 1, "summary": "Rotate the courier API key"}, "requested_by": "op.a", "source": "synthetic"}
+{"action": "issue_refund", "id": "RQ-039", "payload": {"amount_myr": 2100, "blast_radius": 1, "summary": "Refund a large order after a bank transfer reversal"}, "requested_by": "op.c", "source": "synthetic"}
+{"action": "reply_customer_email", "id": "RQ-040", "payload": {"amount_myr": 0, "blast_radius": 1, "summary": "Reply to a complaint about the price page being stale"}, "requested_by": "op.c", "source": "synthetic"}

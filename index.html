@@ -66,7 +66,7 @@
 
         <div class="prose">
           <p>I have spent nine years in operations and content analytics: reviewing and classifying advertising content at scale (74,000+ items, QA accuracy above 95%), supporting high-profile partners, and now running real-time workforce analytics for a global platform — monitoring service levels, forecasting staffing needs and adjusting schedules within the day.</p>
-          <p>The work I care about is turning messy operational data into decisions: SQL and Python analysis, data models, dashboards, and reported numbers that survive being questioned. My three 2026 case studies below each publish their own limitations, because an analysis that hides its weak points is not an analysis.</p>
+          <p>The work I care about is turning messy operational data into decisions: SQL and Python analysis, data models, dashboards, and reported numbers that survive being questioned. My 2026 case studies below each publish their own limitations, because an analysis that hides its weak points is not an analysis.</p>
           <p>I also build and operate AI agents — personas, tool integration, scheduled workflows and human-approval gates — and measure their output quality rather than assuming it. Outside work I deal in physical gold and write about gold saving at <a href="https://suksesdenganemas.com" target="_blank" rel="noopener">Sukses Dengan Emas</a>.</p>
         </div>
 
@@ -167,9 +167,9 @@
       <!-- PROJECTS -->
       <section id="projects" class="section reveal" aria-labelledby="projects-title">
         <h2 class="section__title" id="projects-title"><span class="section__num">03</span> Projects</h2>
-        <p class="section__intro">Five case studies built in 2026, each published with its own results, test numbers and limitations. Earlier dashboards follow underneath.</p>
+        <p class="section__intro">Six case studies built in 2026, each published with its own results, test numbers and limitations. Earlier dashboards follow underneath.</p>
 
-        <h3 class="subhead">2026 — a production agent operation, AI evaluation, SQL analysis, and a knowledge base chatbot</h3>
+        <h3 class="subhead">2026 — a production agent operation, AI evaluation, SQL analysis, a knowledge base chatbot, and an approval-gated operations agent</h3>
 
         <div class="cards">
           <article class="card">
@@ -220,6 +220,16 @@
               <li>Retrieval (BM25)</li><li>Citations</li><li>Refusal guardrails</li><li>Python</li>
             </ul>
             <a class="card__link" href="case-kb-chatbot.html">Read the case study <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="card">
+            <p class="card__year">2026 · Prototype</p>
+            <h3 class="card__title">Operations workflow agent with approval gates and an audit trail</h3>
+            <p class="card__desc">A 40-request operations queue where policy, not the agent, sets the risk tier: 6 actions run unattended, 31 wait for one or two human approvals, 3 can never be run by the agent at all, and no execution happened below its required approval count. Every attempt lands in a hash-chained audit log — nine deliberate bypass attempts (forged, expired, moved and replayed approvals, plus an edited log entry) were all refused or detected.</p>
+            <ul class="tags" aria-label="Tools">
+              <li>Approval gates</li><li>Audit trail</li><li>HMAC tokens</li><li>Python</li>
+            </ul>
+            <a class="card__link" href="case-ops-workflow-agent.html">Read the case study <span aria-hidden="true">→</span></a>
           </article>
         </div>
 

@@ -1,0 +1,385 @@
+[
+  {
+    "id": "RQ-001",
+    "action": "schedule_social_post",
+    "tier": "auto",
+    "risk": 4.12,
+    "outcome": "executed_auto",
+    "approvers": []
+  },
+  {
+    "id": "RQ-002",
+    "action": "schedule_social_post",
+    "tier": "single_approval",
+    "risk": 6.7,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-003",
+    "action": "publish_article",
+    "tier": "single_approval",
+    "risk": 5.36,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-004",
+    "action": "publish_article",
+    "tier": "single_approval",
+    "risk": 5.75,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-005",
+    "action": "reply_customer_email",
+    "tier": "auto",
+    "risk": 8.0,
+    "outcome": "executed_auto",
+    "approvers": []
+  },
+  {
+    "id": "RQ-006",
+    "action": "reply_customer_email",
+    "tier": "auto",
+    "risk": 8.0,
+    "outcome": "executed_auto",
+    "approvers": []
+  },
+  {
+    "id": "RQ-007",
+    "action": "update_product_copy",
+    "tier": "single_approval",
+    "risk": 14.9,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-008",
+    "action": "update_product_copy",
+    "tier": "single_approval",
+    "risk": 26.6,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-009",
+    "action": "schedule_social_post",
+    "tier": "auto",
+    "risk": 4.09,
+    "outcome": "executed_auto",
+    "approvers": []
+  },
+  {
+    "id": "RQ-010",
+    "action": "publish_article",
+    "tier": "single_approval",
+    "risk": 20.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-011",
+    "action": "update_price_page",
+    "tier": "single_approval",
+    "risk": 22.6,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-012",
+    "action": "update_price_page",
+    "tier": "single_approval",
+    "risk": 23.2,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-013",
+    "action": "issue_refund",
+    "tier": "single_approval",
+    "risk": 29.5,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-014",
+    "action": "issue_refund",
+    "tier": "single_approval",
+    "risk": 32.75,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-015",
+    "action": "issue_refund",
+    "tier": "single_approval",
+    "risk": 49.88,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-016",
+    "action": "issue_refund",
+    "tier": "dual_approval",
+    "risk": 68.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops",
+      "lead.finance"
+    ]
+  },
+  {
+    "id": "RQ-017",
+    "action": "send_newsletter",
+    "tier": "single_approval",
+    "risk": 50.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-018",
+    "action": "send_newsletter",
+    "tier": "single_approval",
+    "risk": 35.9,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-019",
+    "action": "update_price_page",
+    "tier": "single_approval",
+    "risk": 48.5,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-020",
+    "action": "issue_refund",
+    "tier": "single_approval",
+    "risk": 29.13,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-021",
+    "action": "schedule_social_post",
+    "tier": "single_approval",
+    "risk": 4.18,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-022",
+    "action": "publish_article",
+    "tier": "single_approval",
+    "risk": 5.63,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-023",
+    "action": "reply_customer_email",
+    "tier": "auto",
+    "risk": 8.0,
+    "outcome": "executed_auto",
+    "approvers": []
+  },
+  {
+    "id": "RQ-024",
+    "action": "update_product_copy",
+    "tier": "single_approval",
+    "risk": 16.4,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-025",
+    "action": "update_price_page",
+    "tier": "single_approval",
+    "risk": 22.27,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-026",
+    "action": "send_newsletter",
+    "tier": "single_approval",
+    "risk": 50.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-027",
+    "action": "issue_refund",
+    "tier": "single_approval",
+    "risk": 36.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-028",
+    "action": "schedule_social_post",
+    "tier": "single_approval",
+    "risk": 6.7,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-029",
+    "action": "update_product_copy",
+    "tier": "single_approval",
+    "risk": 14.45,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-030",
+    "action": "update_price_page",
+    "tier": "single_approval",
+    "risk": 37.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops"
+    ]
+  },
+  {
+    "id": "RQ-031",
+    "action": "bulk_price_change",
+    "tier": "dual_approval",
+    "risk": 70.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops",
+      "lead.finance"
+    ]
+  },
+  {
+    "id": "RQ-032",
+    "action": "bulk_price_change",
+    "tier": "dual_approval",
+    "risk": 65.5,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops",
+      "lead.finance"
+    ]
+  },
+  {
+    "id": "RQ-033",
+    "action": "bulk_price_change",
+    "tier": "dual_approval",
+    "risk": 70.0,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops",
+      "lead.finance"
+    ]
+  },
+  {
+    "id": "RQ-034",
+    "action": "refund_batch",
+    "tier": "dual_approval",
+    "risk": 85.36,
+    "outcome": "executed_after_approval",
+    "approvers": [
+      "lead.ops",
+      "lead.finance"
+    ]
+  },
+  {
+    "id": "RQ-035",
+    "action": "refund_batch",
+    "tier": "dual_approval",
+    "risk": 85.12,
+    "outcome": "rejected_by_approver",
+    "approvers": []
+  },
+  {
+    "id": "RQ-036",
+    "action": "change_payout_account",
+    "tier": "blocked",
+    "risk": 90.0,
+    "outcome": "blocked_by_policy",
+    "approvers": []
+  },
+  {
+    "id": "RQ-037",
+    "action": "delete_records",
+    "tier": "blocked",
+    "risk": 96.02,
+    "outcome": "blocked_by_policy",
+    "approvers": []
+  },
+  {
+    "id": "RQ-038",
+    "action": "rotate_api_key",
+    "tier": "blocked",
+    "risk": 80.0,
+    "outcome": "blocked_by_policy",
+    "approvers": []
+  },
+  {
+    "id": "RQ-039",
+    "action": "issue_refund",
+    "tier": "single_approval",
+    "risk": 53.0,
+    "outcome": "awaiting_approval",
+    "approvers": []
+  },
+  {
+    "id": "RQ-040",
+    "action": "reply_customer_email",
+    "tier": "auto",
+    "risk": 8.0,
+    "outcome": "executed_auto",
+    "approvers": []
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "generated_at_utc": "2026-10-30",
+  "clock_frozen_at": 1780000000,
+  "requests": 40,
+  "routing": {
+    "auto": 6,
+    "single_approval": 25,
+    "dual_approval": 6,
+    "blocked": 3
+  },
+  "outcomes": {
+    "executed_auto": 6,
+    "executed_after_approval": 29,
+    "awaiting_approval": 1,
+    "rejected_by_approver": 1,
+    "blocked_by_policy": 3
+  },
+  "gate": {
+    "attempts": 43,
+    "refused_by_gate": 8,
+    "refusal_rules": [
+      "bad_signature",
+      "expired",
+      "missing_approval",
+      "payload_mismatch",
+      "policy_ceiling",
+      "replay",
+      "self_approval",
+      "wrong_request"
+    ]
+  },
+  "audit": {
+    "entries": 43,
+    "executed_entries": 35,
+    "refused_entries": 8,
+    "chain_verified": true,
+    "first_broken_seq": null,
+    "unapproved_executions": 0
+  },
+  "probes": [
+    {
+      "probe": "execute a single-approval action with no approval",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "missing_approval",
+      "detail": "tier single_approval requires approval, none presented"
+    },
+    {
+      "probe": "present an approval signed with a different key",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "bad_signature",
+      "detail": "token from lead.ops is not signed by this system"
+    },
+    {
+      "probe": "approve your own request",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "self_approval",
+      "detail": "op.c cannot approve their own request"
+    },
+    {
+      "probe": "present an approval that has expired",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "expired",
+      "detail": "token for PROBE-S1 expired at 1779999990"
+    },
+    {
+      "probe": "move a valid approval onto a different request",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "wrong_request",
+      "detail": "token issued for PROBE-S1, presented on PROBE-S2"
+    },
+    {
+      "probe": "change the payload after the approval was signed",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "payload_mismatch",
+      "detail": "token binds a different payload for PROBE-S1"
+    },
+    {
+      "probe": "re-execute a request that already ran",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "replay",
+      "detail": "RQ-001 already executed"
+    },
+    {
+      "probe": "execute a never-execute action with two valid approvals",
+      "expected": "refused",
+      "measured": "refused",
+      "rule": "policy_ceiling",
+      "detail": "change_payout_account is never executed by the agent"
+    },
+    {
+      "probe": "edit an amount in the audit log",
+      "expected": "detected",
+      "measured": "detected",
+      "rule": "audit_chain",
+      "detail": "chain verified before the edit: True; first broken entry after the edit: seq 35"
+    }
+  ],
+  "probes_refused": 9,
+  "probes_total": 9,
+  "note": "Approvals are simulated by a scripted stand-in approver; the gate is real code. Side effects are simulated, not performed."
+}
