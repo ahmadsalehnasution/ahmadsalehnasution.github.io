@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQL queries - gold vs Malaysian household indicators | Ahmad Saleh</title>
+  <meta name="description" content="The ten SQL queries behind the gold vs household indicators case study: one business question per file, with the SQL concept practised.">
+  <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="../../../assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <style>
+    .q{font-weight:600}
+    .c{color:var(--muted);font-size:.92rem}
+    ul.sql{list-style:none;padding:0}
+    ul.sql li{border:1px solid var(--line);border-radius:var(--radius);padding:.8rem 1rem;margin:.7rem 0;background:var(--surface)}
+    ul.sql a{font-family:var(--font-mono);font-size:.9rem}
+  </style>
+</head>
+<body>
+  <main id="main" class="wrap" style="padding:3rem 1.25rem;max-width:56rem;margin:0 auto">
+    <p><a href="../../../case-gold-my-indicators.html">&larr; Back to the case study</a></p>
+    <h1>Ten SQL queries, one business question each</h1>
+    <p>These are the query files behind the <a href="../../../case-gold-my-indicators.html">gold vs Malaysian household indicators</a> case study. Each file is plain SQL, runs in DuckDB against the datasets described in the <a href="../README.md">README</a>, and opens with a comment naming the business question and the SQL concept it practises. The sourcing for every input file is in <a href="../data/raw/_provenance.csv">the provenance table</a>.</p>
+    <ul class="sql">
+      <li><a href="q01_inflation_trend.sql">q01_inflation_trend.sql</a><br><span class="q">How fast have Malaysian consumer prices risen since 2021?</span><br><span class="c">date_trunc, aggregation, LAG window function for year-on-year change</span></li>
+      <li><a href="q02_gold_price_myr.sql">q02_gold_price_myr.sql</a><br><span class="q">What did a gram of gold actually cost in ringgit each month?</span><br><span class="c">joining two daily sources onto a monthly grain, troy ounce to gram conversion, CASE flags for data completeness</span></li>
+      <li><a href="q03_gold_vs_inflation.sql">q03_gold_vs_inflation.sql</a><br><span class="q">Did gold in ringgit beat Malaysian inflation, month by month?</span><br><span class="c">LEFT JOIN across three grains, computed columns, excluding the first 12 months needed for year-on-year</span></li>
+      <li><a href="q04_window_analysis.sql">q04_window_analysis.sql</a><br><span class="q">Is the recent gold move a spike or a sustained trend?</span><br><span class="c">12-month moving average, cumulative product return, ROWS BETWEEN frame, MAX and MIN OVER</span></li>
+      <li><a href="q05_rank_periods.sql">q05_rank_periods.sql</a><br><span class="q">Which years and months were genuinely the best for a ringgit gold buyer?</span><br><span class="c">CTE, GROUP BY plus RANK() OVER, two answer shapes in one file</span></li>
+      <li><a href="q06_affordability_state.sql">q06_affordability_state.sql</a><br><span class="q">How affordable is a gram of gold for a median household in each state?</span><br><span class="c">joining an annual survey grain to a monthly price grain, ranking across states, percentage calculation</span></li>
+      <li><a href="q07_retail_and_labour.sql">q07_retail_and_labour.sql</a><br><span class="q">Does gold strength line up with retail spending and the labour market?</span><br><span class="c">multi-table join, conditional aggregation, deriving a yearly series from monthly data, NULL-safe comparison</span></li>
+      <li><a href="q08_validation.sql">q08_validation.sql</a><br><span class="q">Can the numbers be trusted before publishing?</span><br><span class="c">data-quality checks: coverage, gaps, cross-source agreement between the ECB rate and Bank Negara spot rate</span></li>
+      <li><a href="q09_usd_decomposition.sql">q09_usd_decomposition.sql</a><br><span class="q">Is the ringgit doing the work, or is the metal?</span><br><span class="c">decomposition of the ringgit return into a dollar return and a currency effect</span></li>
+      <li><a href="q10_fx_subperiods.sql">q10_fx_subperiods.sql</a><br><span class="q">Did the currency effect persist, or was it a phase?</span><br><span class="c">named sub-periods measured start to end on monthly averages, plus a constant-exchange-rate counterfactual</span></li>
+    </ul>
+    <p class="c">Served as raw text rather than rendered, so the queries can be read and copied exactly as they were run.</p>
+  </main>
+</body>
+</html>
